@@ -13,7 +13,7 @@ export default function loadAllPlugins(
 	for (const path in files) {
 		files[path]().then((mod) => {
 			if (typeof files[path] === "function") {
-				mod.default(app); // console.log(path, mod);
+				mod.default(app); // console.log(path, mod)
 			}
 		});
 	}

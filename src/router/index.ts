@@ -13,15 +13,22 @@ const routes: RouteRecordRaw[] = [
 			// { path: '/', component: () => import('./views/index.vue') },
 			// { path: '/album/:path/:id.html', component: () => import('./views/album.vue') },
 			// { path: '/song/:path/:id.html', component: () => import('./views/song.vue')},
-			{
-				path: "/:path(.*)*",
-				component: () => import("@/views/NotFound.vue"),
-			},
+			// { path: "/:path(.*)*", component: () => import("@/views/NotFound.vue")},
 		],
+	},
+	{
+		path: "/login",
+		name: "Login",
+		component: () => import("@/views/auth/AuthWrapper.vue"),
+	},
+	{
+		path: "/:catchAll(.*)",
+		name: "PageNotFound",
+		component: () => import("@/views/NotFound.vue"),
 	},
 ];
 
 export default createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes,
 });
