@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		The Header
-		<!-- <fa icon="search" class="ico"></fa> -->
+		<fa icon="search" class="ico"></fa>
 
 		<a-breadcrumb>
 			<a-breadcrumb-item>Home</a-breadcrumb-item>

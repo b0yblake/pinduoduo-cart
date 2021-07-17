@@ -1,4 +1,3 @@
-import { createApp } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -31,3 +30,6 @@ library.add(
 
 // Excute the libs
 // createApp(App).component("fa", FontAwesomeIcon).mount("#app");
+export default function loadComponent(app: any) {
+	app.component("fa", FontAwesomeIcon);
+}
