@@ -6,6 +6,7 @@ import router from "@/router";
 /** Load style sheets */
 import "@/assets/stylesheets/index.scss";
 import "ant-design-vue/dist/antd.css";
+// import "ant-design-vue/dist/antd.dark.css";
 
 /** Load configs */
 import { AppConfig } from "@/config/app";

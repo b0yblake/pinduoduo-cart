@@ -2,7 +2,7 @@
 	<div class="register">Register Tab</div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({

@@ -16,6 +16,7 @@ import {
 	BackTop,
 	Carousel,
 	Breadcrumb,
+	Tooltip,
 } from "ant-design-vue";
 
 /**
@@ -42,4 +43,5 @@ export default function loadComponent(app: any) {
 	app.use(Badge);
 	app.use(Carousel);
 	app.use(Breadcrumb);
+	app.use(Tooltip);
 }

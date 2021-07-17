@@ -20,6 +20,17 @@ const routes: RouteRecordRaw[] = [
 		path: "/login",
 		name: "Login",
 		component: () => import("@/views/auth/AuthWrapper.vue"),
+		alias: ["/register"],
+	},
+	{
+		path: "/forgot-password",
+		name: "ForgotPassword",
+		component: () => import("@/views/auth/ForgotPassword.vue"),
+	},
+	{
+		path: "/retrieve-password",
+		name: "RetrievePassword",
+		component: () => import("@/views/auth/RetrievePassword.vue"),
 	},
 	{
 		path: "/:catchAll(.*)",
@@ -29,6 +40,6 @@ const routes: RouteRecordRaw[] = [
 ];
 
 export default createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory(),
 	routes,
 });
