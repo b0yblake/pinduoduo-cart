@@ -1,0 +1,46 @@
+.intro {
+	&__title {
+		font-size: 18px;
+		margin-top: 25px;
+	}
+
+	&__desc {
+		font-size: 14px;
+		margin-top: 5px;
+		color: rgb(99, 99, 99);
+	}
+}
+
+.form {
+	&__wrap {
+		border-top: 1px solid rgb(235, 235, 235);
+
+		form {
+			margin: 20px 0;
+		}
+	}
+
+
+
+	&__auto-access {
+		@include flexbox;
+		@include justify-content(space-between);
+		margin-top: 10px;
+	}
+
+	&__action {
+		@include flexbox;
+		@include flex-direction(column);
+		margin-top: 100px;
+		text-align: center;
+
+		a {
+			display: block;
+			margin-top: 10px;
+		}
+
+		.spot {
+			color: #ab3b3b
+		}
+	}
+}

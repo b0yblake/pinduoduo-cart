@@ -1,36 +1,30 @@
-import {
-	createRouter,
-	createWebHashHistory,
-	createWebHistory,
-	RouteRecordRaw,
-} from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
 		component: () => import("@/views/HomePage.vue"), // use default page
-		children: [
-			// { path: '/', component: () => import('./views/index.vue') },
-			// { path: '/album/:path/:id.html', component: () => import('./views/album.vue') },
-			// { path: '/song/:path/:id.html', component: () => import('./views/song.vue')},
-			// { path: "/:path(.*)*", component: () => import("@/views/NotFound.vue")},
-		],
 	},
 	{
-		path: "/login",
+		path: "/account/login",
 		name: "Login",
 		component: () => import("@/views/auth/AuthWrapper.vue"),
-		alias: ["/register"],
+		alias: ["/account/register"],
 	},
 	{
-		path: "/forgot-password",
+		path: "/account/forgot-password",
 		name: "ForgotPassword",
 		component: () => import("@/views/auth/ForgotPassword.vue"),
 	},
 	{
-		path: "/retrieve-password",
+		path: "/account/retrieve-password",
 		name: "RetrievePassword",
 		component: () => import("@/views/auth/RetrievePassword.vue"),
+	},
+	{
+		path: "/account/become-vendor",
+		name: "RetrievePassword",
+		component: () => import("@/views/auth/BecomeVendor.vue"),
 	},
 	{
 		path: "/:catchAll(.*)",

@@ -2,10 +2,16 @@
 	<div class="home-layout">
 		<LayoutDefault>
 			<ul>
-				<li><router-link to="login">Login</router-link></li>
-				<li><router-link to="forgot-password">forgot-password</router-link></li>
+				<li><router-link to="/account/login">Login</router-link></li>
 				<li>
-					<router-link to="retrieve-password">retrieve-password</router-link>
+					<router-link to="/account/forgot-password"
+						>forgot-password</router-link
+					>
+				</li>
+				<li>
+					<router-link to="/account/retrieve-password"
+						>retrieve-password</router-link
+					>
 				</li>
 			</ul>
 		</LayoutDefault>

@@ -1,0 +1,29 @@
+.tab {
+	&-nav {
+		@include flexbox;
+		@include justify-content(space-between);
+		@include flex-wrap(nowrap);
+		margin-top: 50px;
+
+		&__item {
+			flex: 1 1 auto;
+
+			&.active {
+				border-bottom: 2px solid #ab3b3b;
+			}
+
+			button {
+				width: 100%;
+				padding: 10px 5px;
+				outline: none;
+				font-weight: 700;
+			}
+		}
+	}
+
+	&-content {
+		margin-top: 20px;
+	}
+
+	&-pane {}
+}

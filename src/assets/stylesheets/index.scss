@@ -2,8 +2,12 @@
 @import "_reset.scss";
 @import "_fonts.scss";
 @import "tailwind.css"; // import tailwind css and all UI
-@import "main.scss";
+@import "mixins/mixins.scss";
 @import "theme.scss";
+@import "sites/common.scss";
+@import "sites/tab.scss";
+@import "sites/auth.scss";
+
 
 //common style
 body,

@@ -1,30 +1,3 @@
-<template>
-	<div class="container">
-		<LayoutOnlyContent>
-			<div class="detail__tab-nav">
-				<ul class="tab-nav">
-					<li
-						v-for="(tab, index) in tabs"
-						:key="`${tab}_${index}`"
-						:class="['tab-nav__item', { active: currentTab === tab }]"
-					>
-						<button type="button" class="" @click="switchRouter(tab)">
-							{{ tab }}
-						</button>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane">
-						<keep-alive>
-							<component :is="currentTabComponent"></component>
-						</keep-alive>
-					</div>
-				</div>
-			</div>
-		</LayoutOnlyContent>
-	</div>
-</template>
-
 <script lang="ts">
 import {
 	ref,
@@ -36,6 +9,7 @@ import {
 } from "vue";
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
 import { useRoute } from "vue-router";
+import logo from "@/assets/images/pinduoduo-logo.png";
 
 export default defineComponent({
 	name: "AuthWrapper",
@@ -59,16 +33,16 @@ export default defineComponent({
 
 		const switchRouter = (tab: string) => {
 			currentTab.value = tab;
-			goTo(`/${tab.toLowerCase()}`);
+			goTo(`/account/${tab.toLowerCase()}`);
 		};
 
 		onMounted(() => {
 			const currentRoute = route.path;
 			switch (currentRoute) {
-				case "/login":
+				case "/account/login":
 					currentTab.value = tabs.value?.[0];
 					break;
-				case "/register":
+				case "/account/register":
 					currentTab.value = tabs.value?.[1];
 					break;
 				default:
@@ -81,7 +55,40 @@ export default defineComponent({
 			currentTab,
 			currentTabComponent,
 			switchRouter,
+			logo,
 		};
 	},
 });
 </script>
+<template>
+	<LayoutOnlyContent>
+		<div class="auth__wrapper">
+			<div class="auth--bg"></div>
+			<div class="auth__action">
+				<h2 class="auth--logo">
+					<img :src="logo" alt="pinduoduo" />
+				</h2>
+				<div class="detail__tab-nav">
+					<ul class="tab-nav">
+						<li
+							v-for="(tab, index) in tabs"
+							:key="`${tab}_${index}`"
+							:class="['tab-nav__item', { active: currentTab === tab }]"
+						>
+							<button type="button" class="" @click="switchRouter(tab)">
+								{{ tab }}
+							</button>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane">
+							<keep-alive>
+								<component :is="currentTabComponent"></component>
+							</keep-alive>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</LayoutOnlyContent>
+</template>

@@ -5,6 +5,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 
 const isProd = process.env.NODE_ENV === "production";
+const isDevl = process.env.NODE_ENV === "development";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,6 +28,8 @@ export default defineConfig({
 				additionalData: `
           @import "./src/assets/stylesheets/_variables";
           @import "./src/assets/stylesheets/include-media";
+					@import "./src/assets/stylesheets/mixins/_mixins.scss";
+					@import "./src/assets/stylesheets/mixins/_theme.mixin.scss";
         `,
 			},
 		},
