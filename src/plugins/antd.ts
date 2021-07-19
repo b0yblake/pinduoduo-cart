@@ -18,7 +18,6 @@ import {
 	Breadcrumb,
 	Tooltip,
 	Checkbox,
-	FormItem,
 } from "ant-design-vue";
 
 /**
@@ -47,5 +46,4 @@ export default function loadComponent(app: any) {
 	app.use(Breadcrumb);
 	app.use(Tooltip);
 	app.use(Checkbox);
-	app.use(FormItem);
 }

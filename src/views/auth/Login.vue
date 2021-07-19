@@ -8,77 +8,103 @@
 			</p>
 		</div>
 		<div class="form__wrap">
-			<form @submit.prevent="submition" autocomplete="off" ref="login_form">
-				<div class="components-input-demo-presuffix">
-					<a-input placeholder="Email or phone number" v-model="username">
-						<template #prefix>
-							<user-outlined type="user" />
-						</template>
-						<template #suffix>
-							<a-tooltip
-								title="User can buy and share cart with friends, all cheap"
-							>
-								<info-circle-outlined style="color: rgba(0, 0, 0, 0.45)" />
-							</a-tooltip>
-						</template>
+			<a-form
+				layout="inline"
+				:model="formState"
+				@finish="handleFinish"
+				@finishFailed="handleFinishFailed"
+			>
+				<a-form-item>
+					<a-input v-model:value="user" placeholder="Username">
+						<template #prefix
+							><UserOutlined style="color: rgba(0, 0, 0, 0.25)"
+						/></template>
 					</a-input>
-					<p></p>
-					<a-input placeholder="Password" v-model="password">
-						<template #prefix>
-							<safety-certificate-filled />
-						</template>
+				</a-form-item>
+				<a-form-item>
+					<a-input
+						v-model:value="password"
+						type="password"
+						placeholder="Password"
+					>
+						<template #prefix
+							><LockOutlined style="color: rgba(0, 0, 0, 0.25)"
+						/></template>
 					</a-input>
-				</div>
-				<div class="form__auto-access">
-					<a-checkbox @change="onChangeRemember"> Remember me </a-checkbox>
-					<router-link to="/account/forgot-password"
-						>Forgot Password?</router-link
+				</a-form-item>
+				<a-form-item>
+					<a-button
+						type="primary"
+						html-type="submit"
+						:disabled="user === '' || password === ''"
 					>
-				</div>
-				<div class="form__action">
-					<a-button type="primary" html-type="submit"> Sign in </a-button>
-					<router-link to="/account/become-vendor"
-						>Want to sell?
-						<strong class="spot">Just become the vendor</strong></router-link
-					>
-				</div>
-			</form>
+						Log in
+					</a-button>
+				</a-form-item>
+			</a-form>
+		</div>
+
+		<div class="form__auto-access">
+			<a-checkbox @change="onChangeRemember"> Remember me </a-checkbox>
+			<router-link to="/account/forgot-password">Forgot Password?</router-link>
+		</div>
+
+		<div class="form__action">
+			<a-button type="primary" html-type="submit"> Sign in </a-button>
+			<router-link to="/account/become-vendor"
+				>Want to sell?
+				<strong class="spot">Just become the vendor</strong></router-link
+			>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
-import {
-	UserOutlined,
-	InfoCircleOutlined,
-	SafetyCertificateFilled,
-} from "@ant-design/icons-vue";
+import { ValidateErrorEntity } from "ant-design-vue/es/form/interface";
+import { defineComponent, reactive, UnwrapRef, toRefs } from "vue";
+import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 // https://www.npmjs.com/package/@ant-design/icons-vue
 // https://github.com/ant-design/ant-design-icons/tree/master/packages/icons-vue/src/icons
+
+interface FormState {
+	user: string | number;
+	password: string;
+	accountRemember: boolean;
+}
 
 export default defineComponent({
 	name: `Login`,
 	components: {
 		UserOutlined,
-		InfoCircleOutlined,
-		SafetyCertificateFilled,
+		LockOutlined,
 	},
-	setup() {
-		const username = ref<string | number>("");
-		const password = ref<string | number>("");
+	emits: ["formLogin"],
+	setup(props, context) {
+		const formState: UnwrapRef<FormState> = reactive({
+			user: "",
+			password: "",
+			accountRemember: false,
+		});
 
-		const onChangeRemember = (e) => {
-			console.log(`checked = ${e.target.checked}`);
+		const handleFinish = (values: FormState) => {
+			console.log("data formState: ", formState);
+			context.emit("formLogin", formState);
 		};
 
-		const submition = () => {};
+		const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
+			console.log(errors);
+		};
+
+		const onChangeRemember = (e: any) => {
+			formState.accountRemember = e.target.checked;
+		};
 
 		return {
-			username,
-			password,
+			formState,
+			...toRefs(formState),
+			handleFinish,
+			handleFinishFailed,
 			onChangeRemember,
-			submition,
 		};
 	},
 });

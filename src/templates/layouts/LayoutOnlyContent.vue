@@ -19,7 +19,7 @@ export default defineComponent({
 <style lang="scss" module>
 .wrap {
 	position: relative;
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #ab3b3b;
 	@include flexbox;
 	@include justify-content(center);
