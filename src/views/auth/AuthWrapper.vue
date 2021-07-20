@@ -15,8 +15,12 @@ export default defineComponent({
 	name: "AuthWrapper",
 	components: {
 		LayoutOnlyContent,
-		Login: defineAsyncComponent(() => import("@/views/auth/Login.vue")),
-		Register: defineAsyncComponent(() => import("@/views/auth/Register.vue")),
+		Login: defineAsyncComponent(
+			() => import("@/components/global/auth/Login.vue")
+		),
+		Register: defineAsyncComponent(
+			() => import("@/components/global/auth/Register.vue")
+		),
 	},
 	setup() {
 		const route = useRoute();

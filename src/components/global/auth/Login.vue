@@ -9,7 +9,7 @@
 		</div>
 		<div class="form__wrap">
 			<a-form
-				layout="inline"
+				layout="vertical"
 				:model="formState"
 				@finish="handleFinish"
 				@finishFailed="handleFinishFailed"
@@ -32,29 +32,31 @@
 						/></template>
 					</a-input>
 				</a-form-item>
-				<a-form-item>
-					<a-button
-						type="primary"
-						html-type="submit"
-						:disabled="user === '' || password === ''"
+
+				<div class="form__auto-access">
+					<a-checkbox @change="onChangeRemember"> Remember me </a-checkbox>
+					<router-link to="/account/forgot-password"
+						>Forgot Password?</router-link
 					>
-						Log in
-					</a-button>
-				</a-form-item>
+				</div>
+
+				<div class="form__action">
+					<a-form-item>
+						<a-button
+							type="primary"
+							html-type="submit"
+							class="btn_submit"
+							:disabled="user === '' || password === ''"
+						>
+							Log in
+						</a-button>
+					</a-form-item>
+					<router-link to="/account/become-vendor"
+						>Want to sell?
+						<strong class="spot">Just become the vendor</strong></router-link
+					>
+				</div>
 			</a-form>
-		</div>
-
-		<div class="form__auto-access">
-			<a-checkbox @change="onChangeRemember"> Remember me </a-checkbox>
-			<router-link to="/account/forgot-password">Forgot Password?</router-link>
-		</div>
-
-		<div class="form__action">
-			<a-button type="primary" html-type="submit"> Sign in </a-button>
-			<router-link to="/account/become-vendor"
-				>Want to sell?
-				<strong class="spot">Just become the vendor</strong></router-link
-			>
 		</div>
 	</div>
 </template>
@@ -110,4 +112,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" module></style>
+<style lang="scss" scoped></style>

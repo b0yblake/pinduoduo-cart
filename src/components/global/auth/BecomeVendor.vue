@@ -1,6 +1,6 @@
 <template>
 	<LayoutOnlyContent>
-		<div class="form__wrap">Retrieve password</div>
+		<div class="form__wrap">Become Vendor</div>
 	</LayoutOnlyContent>
 </template>
 

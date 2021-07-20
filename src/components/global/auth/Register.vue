@@ -11,40 +11,43 @@
 			<a-form
 				name="custom-validation"
 				ref="formRef"
+				layout="vertical"
 				:model="formState"
 				:rules="rules"
-				v-bind="layout"
 				@finish="handleFinish"
 				@finishFailed="handleFinishFailed"
-				@submit.prevent="onSubmit"
 			>
-				<a-form-item ref="username" label="Username" name="username">
-					<a-input v-model:value="formState.username" />
+				<a-form-item ref="name" label="Username" name="name">
+					<a-input v-model:value="username" />
 				</a-form-item>
 				<a-form-item has-feedback label="Password" name="pass">
-					<a-input
-						v-model:value="formState.pass"
-						type="password"
-						autocomplete="off"
-					/>
+					<a-input v-model:value="pass" type="password" autocomplete="off" />
 				</a-form-item>
 				<a-form-item has-feedback label="Confirm" name="checkPass">
 					<a-input
-						v-model:value="formState.checkPass"
+						v-model:value="checkPass"
 						type="password"
 						autocomplete="off"
 					/>
 				</a-form-item>
-				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-					<a-button type="primary" html-type="submit">Submit</a-button>
-				</a-form-item>
+
+				<div class="form__action">
+					<a-form-item>
+						<a-button type="primary" html-type="submit" class="btn_submit">
+							Register
+						</a-button>
+					</a-form-item>
+					<router-link to="/account/become-vendor"
+						>Already has account? Click to login
+					</router-link>
+				</div>
 			</a-form>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, UnwrapRef, toRaw } from "vue";
+import { defineComponent, reactive, ref, UnwrapRef, toRefs } from "vue";
 import {
 	RuleObject,
 	ValidateErrorEntity,
@@ -58,7 +61,8 @@ interface FormState {
 
 export default defineComponent({
 	name: `Register`,
-	setup() {
+	emits: ["formRegister"],
+	setup(props, context) {
 		const formRef = ref();
 		const formState: UnwrapRef<FormState> = reactive({
 			username: "",
@@ -68,70 +72,61 @@ export default defineComponent({
 
 		const validatePass = async (rule: RuleObject, value: string) => {
 			if (value === "") {
-				return Promise.reject("Please input the password");
-			} else {
-				if (formState.checkPass !== "") {
-					formRef.value.validateField("checkPass");
-				}
-				return Promise.resolve();
+				return Promise.reject(new Error("Please input the password"));
 			}
+			if (formState.checkPass !== "") {
+				// formRef.value.validateField("checkPass");
+				formRef.value = "checkPass";
+			}
+
+			return Promise.resolve();
 		};
 
 		const validatePass2 = async (rule: RuleObject, value: string) => {
 			if (value === "") {
-				return Promise.reject("Please input the password again");
-			} else if (value !== formState.pass) {
-				return Promise.reject("Two inputs don't match!");
-			} else {
-				return Promise.resolve();
+				return Promise.reject(new Error("Please input the password again"));
 			}
+			if (value !== formState.pass) {
+				return Promise.reject(new Error("Two inputs don't match!"));
+			}
+
+			return Promise.resolve();
 		};
 
 		const rules = {
 			username: [
 				{
 					required: true,
-					message: "Please input Activity name",
+					message: "Your user name",
 					trigger: "blur",
 				},
-				{ min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+				{
+					min: 8,
+					max: 16,
+					message: "Length should be 8 to 16 characters",
+					trigger: "blur",
+				},
 			],
 			pass: [{ required: true, validator: validatePass, trigger: "change" }],
 			checkPass: [{ validator: validatePass2, trigger: "change" }],
 		};
 
-		const layout = {
-			labelCol: { span: 4 },
-			wrapperCol: { span: 14 },
-		};
-
 		const handleFinish = (values: FormState) => {
-			console.log(values, formState);
+			// console.log(values, formState);
+			context.emit("formRegister", formState);
 		};
 
 		const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
-			console.log(errors);
-		};
-
-		const onSubmit = () => {
-			formRef.value
-				.validate()
-				.then(() => {
-					console.log("values", formState, toRaw(formState));
-				})
-				.catch((error: ValidateErrorEntity<FormState>) => {
-					console.log("error", error);
-				});
+			console.log("errors: ", errors);
 		};
 
 		return {
+			...toRefs(formState),
 			formState,
 			formRef,
 			rules,
-			layout,
 			handleFinishFailed,
 			handleFinish,
-			onSubmit,
 		};
 	},
 });

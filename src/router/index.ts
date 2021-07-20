@@ -14,17 +14,12 @@ const routes: RouteRecordRaw[] = [
 	{
 		path: "/account/forgot-password",
 		name: "ForgotPassword",
-		component: () => import("@/views/auth/ForgotPassword.vue"),
-	},
-	{
-		path: "/account/retrieve-password",
-		name: "RetrievePassword",
-		component: () => import("@/views/auth/RetrievePassword.vue"),
+		component: () => import("@/components/global/auth/ForgotPassword.vue"),
 	},
 	{
 		path: "/account/become-vendor",
-		name: "RetrievePassword",
-		component: () => import("@/views/auth/BecomeVendor.vue"),
+		name: "BecomeVendor",
+		component: () => import("@/components/global/auth/BecomeVendor.vue"),
 	},
 	{
 		path: "/:catchAll(.*)",
