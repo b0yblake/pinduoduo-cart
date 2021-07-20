@@ -14,6 +14,8 @@
 					>
 				</li>
 			</ul>
+
+			<CarouselGroup :title="'Originals carousel'" />
 		</LayoutDefault>
 	</div>
 </template>
