@@ -47,6 +47,7 @@
 		"es6-promise": "^4.2.8",
 		"include-media": "^1.4.10",
 		"lodash-es": "^4.17.21",
+		"moment": "^2.29.1",
 		"register-service-worker": "^1.7.2",
 		"swiper": "^6.7.5",
 		"vite-plugin-components": "^0.11.1",
