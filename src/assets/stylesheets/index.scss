@@ -7,7 +7,7 @@
 @import "sites/common.scss";
 @import "sites/tab.scss";
 @import "sites/auth.scss";
-
+@import "sites/carousel.scss";
 
 //common style
 body,
@@ -23,7 +23,7 @@ button {
 }
 
 body {
-	// background-color: #f7f7f7;
+	background-color: #141414 !important;
 }
 
 .a11y-hidden {

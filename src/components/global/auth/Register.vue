@@ -37,7 +37,7 @@
 							Register
 						</a-button>
 					</a-form-item>
-					<router-link to="/account/become-vendor"
+					<router-link to="/account/login"
 						>Already has account? Click to login
 					</router-link>
 				</div>

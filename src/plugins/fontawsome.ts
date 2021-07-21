@@ -13,6 +13,8 @@ import {
 	faHeart,
 	faArrowLeft,
 	faTimes,
+	faPlus,
+	faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -25,7 +27,9 @@ library.add(
 	faSearch,
 	faHeart,
 	faArrowLeft,
-	faTimes
+	faTimes,
+	faPlus,
+	faChevronDown
 );
 
 // Excute the libs

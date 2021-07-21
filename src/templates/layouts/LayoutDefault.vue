@@ -26,8 +26,7 @@ export default defineComponent({
 
 <style lang="scss" module>
 .wrap {
-	.main {
-		position: relative;
-	}
+	position: relative;
+	overflow: hidden;
 }
 </style>

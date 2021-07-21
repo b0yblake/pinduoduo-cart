@@ -1,5 +1,5 @@
 // import Swiper core and required modules
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -9,10 +9,10 @@ import "swiper/swiper.scss";
 // Import style each functions, it's optional
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
-import "swiper/components/scrollbar/scrollbar.scss";
+// import "swiper/components/scrollbar/scrollbar.scss";
 
 // install Swiper modules
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Pagination, A11y]);
 
 /**
  * @description manually register the antd-vue component to achieve the purpose of on-demand loading
