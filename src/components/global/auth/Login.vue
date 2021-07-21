@@ -89,7 +89,7 @@ export default defineComponent({
 		});
 
 		const handleFinish = (values: FormState) => {
-			console.log("data formState: ", formState);
+			// console.log("data formState: ", formState);
 			context.emit("formLogin", formState);
 		};
 

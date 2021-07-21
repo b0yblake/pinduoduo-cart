@@ -8,15 +8,29 @@
 						Enter your email, we will send to you the code.
 					</p>
 				</div>
-				<a-form-item label="Email registed" v-bind="validateInfos.name">
+				<a-form-item label="Email registed" v-bind="validateInfos.email">
 					<a-input
-						v-model:value="name"
-						@blur="validate('name', { trigger: 'blur' }).catch(() => {})"
+						v-model:value="email"
+						@blur="validate('email', { trigger: 'blur' }).catch(() => {})"
 					/>
 				</a-form-item>
 				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
 					<a-button type="primary" @click.prevent="onSubmit"
 						>Send code to email</a-button
+					>
+				</a-form-item>
+			</a-form>
+
+			<a-form :label-col="labelCol" :wrapper-col="wrapperCol">
+				<a-form-item label="Enter your code: " v-bind="validateInfos.code">
+					<a-input
+						v-model:value="code"
+						@blur="validate('code', { trigger: 'blur' }).catch(() => {})"
+					/>
+				</a-form-item>
+				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+					<a-button type="primary" @click.prevent="onSubmit"
+						>Change password</a-button
 					>
 				</a-form-item>
 			</a-form>
@@ -27,7 +41,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRaw, toRefs } from "vue";
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
-import { Form } from "ant-design-vue";
+import { Form, notification } from "ant-design-vue";
 
 const useForm = Form.useForm;
 
@@ -36,34 +50,64 @@ export default defineComponent({
 	components: {
 		LayoutOnlyContent,
 	},
-	setup() {
+	emits: ["emailForgot"],
+	setup(props, context) {
 		const modelRef = reactive({
-			name: "",
+			email: "",
+			code: "",
 		});
 		const rulesRef = reactive({
-			name: [
+			email: [
 				{
 					required: true,
 					message: "Please enter your email",
 				},
 				{
-					min: 8,
-					max: 16,
-					message: "Email should be like 'example@gmail.com'",
+					min: 16,
+					max: 24,
+					message: "Email should length form 8 to 16 characters",
+					trigger: "blur",
+				},
+			],
+			code: [
+				{
+					required: true,
+					message: "Please enter your code",
+				},
+				{
+					min: 0,
+					max: 6,
+					message: "Code should length form 8 to 16 characters",
 					trigger: "blur",
 				},
 			],
 		});
+
+		const openNotificationWithIcon = (type: string) => {
+			notification[type]({
+				message: "Oops, something went wrong!",
+				description: "Your email not right",
+			});
+		};
+
+		const showFormRecovery = () => {
+			openNotificationWithIcon("success");
+		};
+
 		const { validate, validateInfos } = useForm(modelRef, rulesRef);
 		const onSubmit = () => {
 			validate()
 				.then(() => {
+					// context.emit("emailForgot", toRaw(modelRef));
 					console.log(toRaw(modelRef));
+					showFormRecovery();
 				})
 				.catch((err) => {
 					console.log("error", err);
+					openNotificationWithIcon("error");
 				});
 		};
+
 		return {
 			labelCol: { span: 4 },
 			wrapperCol: { span: 14 },
@@ -79,7 +123,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .auth__wrapper {
-	justify-content: center;
+	@include flexbox;
+	@include flex-direction(column);
+	@include justify-content(center);
+	@include align-items(center);
 	.ant-form {
 		min-width: 80%;
 		padding: 50px 0;

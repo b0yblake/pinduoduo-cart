@@ -17,18 +17,41 @@
 				@finish="handleFinish"
 				@finishFailed="handleFinishFailed"
 			>
-				<a-form-item ref="name" label="Username" name="name">
-					<a-input v-model:value="username" />
+				<a-form-item>
+					<a-input
+						v-model:value="username"
+						placeholder="Username"
+						ref="name"
+						name="name"
+					>
+						<template #prefix
+							><UserOutlined style="color: rgba(0, 0, 0, 0.25)"
+						/></template>
+					</a-input>
 				</a-form-item>
-				<a-form-item has-feedback label="Password" name="pass">
-					<a-input v-model:value="pass" type="password" autocomplete="off" />
+				<a-form-item has-feedback name="pass">
+					<a-input
+						v-model:value="pass"
+						type="password"
+						autocomplete="off"
+						placeholder="Password"
+					>
+						<template #prefix
+							><LockOutlined style="color: rgba(0, 0, 0, 0.25)"
+						/></template>
+					</a-input>
 				</a-form-item>
-				<a-form-item has-feedback label="Confirm" name="checkPass">
+				<a-form-item has-feedback name="checkPass">
 					<a-input
 						v-model:value="checkPass"
 						type="password"
 						autocomplete="off"
-					/>
+						placeholder="Confirm"
+					>
+						<template #prefix
+							><LockOutlined style="color: rgba(0, 0, 0, 0.25)"
+						/></template>
+					</a-input>
 				</a-form-item>
 
 				<div class="form__action">
@@ -37,7 +60,7 @@
 							Register
 						</a-button>
 					</a-form-item>
-					<router-link to="/account/login"
+					<router-link to="/account/login" @click="switchToLogin"
 						>Already has account? Click to login
 					</router-link>
 				</div>
@@ -52,6 +75,10 @@ import {
 	RuleObject,
 	ValidateErrorEntity,
 } from "ant-design-vue/es/form/interface";
+import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
+// https://www.npmjs.com/package/@ant-design/icons-vue
+// https://github.com/ant-design/ant-design-icons/tree/master/packages/icons-vue/src/icons
+import { notification } from "ant-design-vue";
 
 interface FormState {
 	username: string | number;
@@ -61,7 +88,11 @@ interface FormState {
 
 export default defineComponent({
 	name: `Register`,
-	emits: ["formRegister"],
+	emits: ["formRegister", "currentTab"],
+	components: {
+		UserOutlined,
+		LockOutlined,
+	},
 	setup(props, context) {
 		const formRef = ref();
 		const formState: UnwrapRef<FormState> = reactive({
@@ -112,12 +143,25 @@ export default defineComponent({
 		};
 
 		const handleFinish = (values: FormState) => {
-			// console.log(values, formState);
+			// console.log("success: ", formState);
 			context.emit("formRegister", formState);
+		};
+
+		const openNotificationWithIcon = (type: string) => {
+			notification[type]({
+				message: "Oops, something went wrong!",
+				description: "Username or password incorrect, please try again!",
+			});
 		};
 
 		const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
 			console.log("errors: ", errors);
+			openNotificationWithIcon("error");
+		};
+
+		const switchToLogin = () => {
+			// console.log("clicked submit emit currentTab");
+			context.emit("currentTab", "Login");
 		};
 
 		return {
@@ -127,6 +171,7 @@ export default defineComponent({
 			rules,
 			handleFinishFailed,
 			handleFinish,
+			switchToLogin,
 		};
 	},
 });
