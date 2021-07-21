@@ -3,10 +3,14 @@
 <strong>The rise of Social E-Commerce</strong>
 
 ## Screenshot
+
 <!-- <p align="center"><img src="@screenshot/home.png" alt="" width="100%" height="auto"></p> -->
 
 ## Architecture
+
+<p align="center"><img src="@screenshot/PDD-Overview0.jpg" alt="" width="100%" height="auto"></p>
 <p align="center"><img src="@screenshot/PDD-Overview2.jpg" alt="" width="100%" height="auto"></p>
+<p align="center"><img src="@screenshot/PDD-Overview2.1.jpg" alt="" width="100%" height="auto"></p>
 <p align="center"><img src="@screenshot/PDD-Overview.jpg" alt="" width="100%" height="auto"></p>
 
 ## Getting started
