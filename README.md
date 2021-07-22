@@ -1,4 +1,4 @@
-<h1 align="center">🌊 Cart share with a friend like Pinduoduo 🌊</h1>
+<h1 align="center">🛒 Cart share with friends like Pinduoduo 🛒</h1>
 
 <strong>The rise of Social E-Commerce</strong>
 

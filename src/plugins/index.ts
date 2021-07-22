@@ -10,11 +10,11 @@ export default function loadAllPlugins(
 ): void {
 	const files = import.meta.glob("./*.ts");
 
-	for (const path in files) {
+	Object.keys(files).forEach((path) => {
 		files[path]().then((mod) => {
 			if (typeof files[path] === "function") {
 				mod.default(app); // console.log(path, mod)
 			}
 		});
-	}
+	});
 }

@@ -22,11 +22,8 @@
 			</a-form>
 
 			<a-form :label-col="labelCol" :wrapper-col="wrapperCol">
-				<a-form-item label="Enter your code: " v-bind="validateInfos.code">
-					<a-input
-						v-model:value="code"
-						@blur="validate('code', { trigger: 'blur' }).catch(() => {})"
-					/>
+				<a-form-item label="Enter your code: ">
+					<a-input v-model:value="code" />
 				</a-form-item>
 				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
 					<a-button type="primary" @click.prevent="onSubmit"
@@ -66,18 +63,6 @@ export default defineComponent({
 					min: 16,
 					max: 24,
 					message: "Email should length form 8 to 16 characters",
-					trigger: "blur",
-				},
-			],
-			code: [
-				{
-					required: true,
-					message: "Please enter your code",
-				},
-				{
-					min: 0,
-					max: 6,
-					message: "Code should length form 8 to 16 characters",
 					trigger: "blur",
 				},
 			],
