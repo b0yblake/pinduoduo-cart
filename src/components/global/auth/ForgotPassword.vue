@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRaw, toRefs } from "vue";
+import { defineComponent, reactive, toRaw, toRefs, inject } from "vue";
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
 import { Form, notification } from "ant-design-vue";
 
@@ -49,6 +49,7 @@ export default defineComponent({
 	},
 	emits: ["emailForgot"],
 	setup(props, context) {
+		const $notification = inject("$notification");
 		const modelRef = reactive({
 			email: "",
 			code: "",
@@ -68,15 +69,12 @@ export default defineComponent({
 			],
 		});
 
-		const openNotificationWithIcon = (type: string) => {
-			notification[type]({
-				message: "Oops, something went wrong!",
-				description: "Your email not right",
-			});
-		};
-
 		const showFormRecovery = () => {
-			openNotificationWithIcon("success");
+			try {
+				$notification.success("Ok done!", "Great!");
+			} catch (error) {
+				console.error(error);
+			}
 		};
 
 		const { validate, validateInfos } = useForm(modelRef, rulesRef);
@@ -88,8 +86,15 @@ export default defineComponent({
 					showFormRecovery();
 				})
 				.catch((err) => {
-					console.log("error", err);
-					openNotificationWithIcon("error");
+					// console.log("error", err);
+					try {
+						$notification.error(
+							"Oops, something went wrong!",
+							"Username or password incorrect, please try again!"
+						);
+					} catch (error) {
+						console.error(error);
+					}
 				});
 		};
 

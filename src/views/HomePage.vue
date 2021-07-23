@@ -15,22 +15,15 @@
 				</li>
 			</ul>
 
-			<CarouselGroup :title="'Originals carousel'" />
+			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
 
-			<button type="button" @click="isDisplay = true">Click show</button>
-			<BaseMessageNotification
-				:isDisplay="isDisplay"
-				:message="message"
-				:description="description"
-				:code="code"
-				@isDisplay="handleIsDisplay"
-			/>
+			<button type="button" @click="changeNotification">Click Cai lay</button>
 		</LayoutDefault>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, inject } from "vue";
 import LayoutDefault from "@/templates/layouts/LayoutDefault.vue";
 
 export default defineComponent({
@@ -39,21 +32,17 @@ export default defineComponent({
 		LayoutDefault,
 	},
 	setup() {
-		const sampleMessage = reactive({
-			isDisplay: false,
-			message: "Oops! some thing went wrong!",
-			description: "Please try again!",
-			code: "success",
-			duration: 3,
-		});
-
-		const handleIsDisplay = (value: boolean) => {
-			sampleMessage.isDisplay = value;
+		const $notification = inject("$notification");
+		const changeNotification = () => {
+			try {
+				$notification.success("message day", "desc day");
+			} catch (error) {
+				console.error(error);
+			}
 		};
 
 		return {
-			...toRefs(sampleMessage),
-			handleIsDisplay,
+			changeNotification,
 		};
 	},
 });

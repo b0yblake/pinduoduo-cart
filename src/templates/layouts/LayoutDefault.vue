@@ -14,6 +14,7 @@
 		<TheFooter />
 		<!-- //THE FOOTER -->
 	</div>
+	<BaseMessageNotification />
 </template>
 
 <script>

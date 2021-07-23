@@ -2,77 +2,39 @@
 	<div>isDisplay: {{ isDisplay }}</div>
 </template>
 <script lang="ts">
-import {
-	defineComponent,
-	onUpdated,
-	PropType,
-	reactive,
-	toRef,
-	UnwrapRef,
-	onMounted,
-	watch,
-	ref,
-} from "vue";
+import { defineComponent, inject, watch } from "vue";
 import { notification } from "ant-design-vue";
 
-// interface MessageNotificationType {
-// 	isDisplay?: Boolean;
-// 	message?: String;
-// 	description?: String;
-// 	code?: String;
-// }
+interface MessageNotificationType {
+	isDisplay?: Boolean;
+	message?: String;
+	description?: String;
+	code?: String;
+}
 
 export default defineComponent({
 	name: "BaseMessageNotification",
-	props: {
-		isDisplay: {
-			type: Boolean,
-			// default: false,
-		},
-		message: {
-			type: String,
-			required: true,
-		},
-		description: {
-			type: String,
-			required: true,
-		},
-		code: {
-			type: String,
-			default: "error",
-		},
-		duration: {
-			type: Number,
-			default: 3,
-		},
-	},
-	emits: ["isDisplay"],
-	setup(props, context) {
-		const optMessage = reactive({
-			message: props.message,
-			description: props.description,
-		});
-
+	setup() {
+		const $notification = inject("$notification");
 		const openNotificationWithIcon = () => {
-			notification[props.code]({
-				message: optMessage.message,
-				description: optMessage.description,
+			notification[$notification?.notificationData?.code]({
+				message: $notification?.notificationData?.message,
+				description: $notification?.notificationData?.description,
 			});
 		};
 
 		watch(
-			() => props.isDisplay,
+			() => $notification.notificationData.isDisplay,
 			(newVal, oldVal) => {
-				if (newVal === true) openNotificationWithIcon();
+				if (newVal) {
+					openNotificationWithIcon();
+					$notification.close();
+				}
 			}
 		);
 
-		onUpdated(() => {
-			context.emit("isDisplay", false);
-		});
-
 		return {
-			// openNotificationWithIcon,
+			isDisplay: $notification?.notificationData?.isDisplay,
 		};
 	},
 });

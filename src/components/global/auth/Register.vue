@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, UnwrapRef, toRefs } from "vue";
+import { defineComponent, reactive, ref, UnwrapRef, toRefs, inject } from "vue";
 import {
 	RuleObject,
 	ValidateErrorEntity,
@@ -78,7 +78,6 @@ import {
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 // https://www.npmjs.com/package/@ant-design/icons-vue
 // https://github.com/ant-design/ant-design-icons/tree/master/packages/icons-vue/src/icons
-import { notification } from "ant-design-vue";
 
 interface FormState {
 	username: string | number;
@@ -94,6 +93,7 @@ export default defineComponent({
 		LockOutlined,
 	},
 	setup(props, context) {
+		const $notification = inject("$notification");
 		const formRef = ref();
 		const formState: UnwrapRef<FormState> = reactive({
 			username: "",
@@ -147,16 +147,16 @@ export default defineComponent({
 			context.emit("formRegister", formState);
 		};
 
-		const openNotificationWithIcon = (type: string) => {
-			notification[type]({
-				message: "Oops, something went wrong!",
-				description: "Username or password incorrect, please try again!",
-			});
-		};
-
 		const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
-			console.log("errors: ", errors);
-			openNotificationWithIcon("error");
+			// console.log("errors: ", errors);
+			try {
+				$notification.error(
+					"Oops, something went wrong!",
+					"Username or password incorrect, please try again!"
+				);
+			} catch (error) {
+				console.error(error);
+			}
 		};
 
 		const switchToLogin = () => {

@@ -6,6 +6,7 @@
 		</main>
 		<!-- //MAIN -->
 	</div>
+	<BaseMessageNotification />
 </template>
 
 <script>
