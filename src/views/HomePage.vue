@@ -17,7 +17,9 @@
 
 			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
 
-			<button type="button" @click="changeNotification">Click Cai lay</button>
+			<button type="button" @click="showNotification">
+				Click to show notification
+			</button>
 		</LayoutDefault>
 	</div>
 </template>
@@ -33,7 +35,7 @@ export default defineComponent({
 	},
 	setup() {
 		const $notification = inject("$notification");
-		const changeNotification = () => {
+		const showNotification = () => {
 			try {
 				$notification.success("message day", "desc day");
 			} catch (error) {
@@ -42,7 +44,7 @@ export default defineComponent({
 		};
 
 		return {
-			changeNotification,
+			showNotification,
 		};
 	},
 });

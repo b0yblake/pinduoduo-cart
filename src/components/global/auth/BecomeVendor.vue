@@ -8,45 +8,47 @@
 				:label-col="labelCol"
 				:wrapper-col="wrapperCol"
 			>
-				<a-form-item ref="name" label="Activity name" name="name">
-					<a-input v-model:value="name" />
+				<a-form-item ref="name" label="Your name" name="name">
+					<a-input v-model:value="formState.name" />
 				</a-form-item>
-				<a-form-item label="Activity zone" name="region">
+				<a-form-item ref="storeName" label="Your store name" name="storeName">
+					<a-input v-model:value="formState.storeName" />
+				</a-form-item>
+				<a-form-item label="Activity zone" name="plan">
 					<a-select
-						v-model:value="region"
-						placeholder="please select your zone"
+						v-model:value="formState.plan"
+						placeholder="Please select your plan"
 					>
-						<a-select-option value="shanghai">Zone one</a-select-option>
-						<a-select-option value="beijing">Zone two</a-select-option>
+						<a-select-option value="planOnly">Only B2C</a-select-option>
+						<a-select-option value="planBoth">B2B & B2c</a-select-option>
 					</a-select>
 				</a-form-item>
-				<a-form-item label="Activity time" required name="date1">
+				<a-form-item label="Date grand opening" required name="date">
 					<a-date-picker
-						v-model:value="date1"
+						v-model:value="formState.date"
 						show-time
 						type="date"
 						placeholder="Pick a date"
 						style="width: 100%"
 					/>
 				</a-form-item>
-				<a-form-item label="Instant delivery" name="delivery">
-					<a-switch v-model:checked="delivery" />
+				<a-form-item label="Is your a factory?" name="factory">
+					<a-switch v-model:checked="formState.factory" />
 				</a-form-item>
-				<a-form-item label="Activity type" name="type">
-					<a-checkbox-group v-model:value="type">
+				<a-form-item label="Activity type available" name="type">
+					<a-checkbox-group v-model:value="formState.type">
 						<a-checkbox value="1" name="type">Online</a-checkbox>
-						<a-checkbox value="2" name="type">Promotion</a-checkbox>
-						<a-checkbox value="3" name="type">Offline</a-checkbox>
+						<a-checkbox value="2" name="type">Offline</a-checkbox>
 					</a-checkbox-group>
 				</a-form-item>
-				<a-form-item label="Resources" name="resource">
-					<a-radio-group v-model:value="resource">
-						<a-radio value="1">Sponsor</a-radio>
-						<a-radio value="2">Venue</a-radio>
+				<a-form-item label="Available resources" name="resource">
+					<a-radio-group v-model:value="formState.resource">
+						<a-radio value="1">Available</a-radio>
+						<a-radio value="2">Pre-order</a-radio>
 					</a-radio-group>
 				</a-form-item>
-				<a-form-item label="Activity form" name="desc">
-					<a-textarea v-model:value="desc" />
+				<a-form-item label="Description of your store" name="desc">
+					<a-textarea v-model:value="formState.desc" />
 				</a-form-item>
 				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
 					<a-button type="primary" @click="onSubmit">Create</a-button>
@@ -63,20 +65,21 @@
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
 import { ValidateErrorEntity } from "ant-design-vue/es/form/interface";
 import { Moment } from "moment";
-import { defineComponent, reactive, ref, toRaw, UnwrapRef, toRefs } from "vue";
+import { defineComponent, reactive, ref, toRaw, UnwrapRef } from "vue";
 
 interface FormState {
 	name: string;
-	region: string | undefined;
-	date1: Moment | undefined;
-	delivery: boolean;
+	storeName: string;
+	plan: string | undefined;
+	date: Moment | undefined;
+	factory: boolean;
 	type: string[];
 	resource: string;
 	desc: string;
 }
 
 export default defineComponent({
-	name: `RetrievePassword`,
+	name: `BecomeVender`,
 	components: {
 		LayoutOnlyContent,
 	},
@@ -84,9 +87,10 @@ export default defineComponent({
 		const formRef = ref();
 		const formState: UnwrapRef<FormState> = reactive({
 			name: "",
-			region: undefined,
-			date1: undefined,
-			delivery: false,
+			storeName: "",
+			plan: undefined,
+			date: undefined,
+			factory: false,
 			type: [],
 			resource: "",
 			desc: "",
@@ -95,22 +99,46 @@ export default defineComponent({
 			name: [
 				{
 					required: true,
-					message: "Please input Activity name",
+					message: "Please enter your full name",
 					trigger: "blur",
 				},
-				{ min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+				{
+					min: 5,
+					max: 32,
+					message: "Length of your name should be 5 to 32",
+					trigger: "blur",
+				},
 			],
-			region: [
+			storeName: [
 				{
 					required: true,
-					message: "Please select Activity zone",
+					message: "Please enter your store name",
+					trigger: "blur",
+				},
+				{
+					min: 5,
+					max: 16,
+					message: "Length of your store name should be 5 to 16",
+					trigger: "blur",
+				},
+				{
+					pattern: new RegExp("^[A-Za-z0-9_.-]*$"),
+					message:
+						"Wrong format! Your store code will not contain a special chars",
+					trigger: "blur",
+				},
+			],
+			plan: [
+				{
+					required: true,
+					message: "Please select yor plan",
 					trigger: "change",
 				},
 			],
-			date1: [
+			date: [
 				{
 					required: true,
-					message: "Please pick a date",
+					message: "Please pick a date of grand opening",
 					trigger: "change",
 					type: "object",
 				},
@@ -143,7 +171,7 @@ export default defineComponent({
 			formRef.value
 				.validate()
 				.then(() => {
-					console.log("values", formState, toRaw(formState));
+					console.log("Values prepare for API: ", formState, toRaw(formState));
 				})
 				.catch((error: ValidateErrorEntity<FormState>) => {
 					console.log("error", error);
@@ -156,8 +184,7 @@ export default defineComponent({
 
 		return {
 			formRef,
-			...toRefs(formState),
-			labelCol: { span: 4 },
+			labelCol: { span: 6 },
 			wrapperCol: { span: 14 },
 			other: "",
 			formState,

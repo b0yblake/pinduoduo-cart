@@ -18,6 +18,9 @@ import {
 	Breadcrumb,
 	Tooltip,
 	Checkbox,
+	Switch,
+	Radio,
+	RadioButton,
 } from "ant-design-vue";
 
 /**
@@ -46,4 +49,7 @@ export default function loadComponent(app: any) {
 	app.use(Breadcrumb);
 	app.use(Tooltip);
 	app.use(Checkbox);
+	app.use(Switch);
+	app.use(Radio);
+	app.use(RadioButton);
 }

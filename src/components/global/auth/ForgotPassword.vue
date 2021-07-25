@@ -10,7 +10,7 @@
 				</div>
 				<a-form-item label="Email registed" v-bind="validateInfos.email">
 					<a-input
-						v-model:value="email"
+						v-model:value="modelRef.email"
 						@blur="validate('email', { trigger: 'blur' }).catch(() => {})"
 					/>
 				</a-form-item>
@@ -21,9 +21,13 @@
 				</a-form-item>
 			</a-form>
 
-			<a-form :label-col="labelCol" :wrapper-col="wrapperCol">
+			<a-form
+				:label-col="labelCol"
+				:wrapper-col="wrapperCol"
+				v-show="enableStepValidateCode"
+			>
 				<a-form-item label="Enter your code: ">
-					<a-input v-model:value="code" />
+					<a-input v-model:value="modelRef.code" />
 				</a-form-item>
 				<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
 					<a-button type="primary" @click.prevent="onSubmit"
@@ -36,9 +40,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRaw, toRefs, inject } from "vue";
+import { defineComponent, reactive, toRaw, inject, ref } from "vue";
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
-import { Form, notification } from "ant-design-vue";
+import { Form } from "ant-design-vue";
 
 const useForm = Form.useForm;
 
@@ -48,8 +52,9 @@ export default defineComponent({
 		LayoutOnlyContent,
 	},
 	emits: ["emailForgot"],
-	setup(props, context) {
+	setup() {
 		const $notification = inject("$notification");
+		const enableStepValidateCode = ref(false);
 		const modelRef = reactive({
 			email: "",
 			code: "",
@@ -61,36 +66,39 @@ export default defineComponent({
 					message: "Please enter your email",
 				},
 				{
-					min: 16,
+					min: 8,
 					max: 24,
-					message: "Email should length form 8 to 16 characters",
+					message: "Email should length form 8 to 24 characters",
+					trigger: "blur",
+				},
+				{
+					pattern: new RegExp(
+						"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+					),
+					message: "Wrong format! Your email will not contain a special chars",
 					trigger: "blur",
 				},
 			],
 		});
 
-		const showFormRecovery = () => {
-			try {
-				$notification.success("Ok done!", "Great!");
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
 		const { validate, validateInfos } = useForm(modelRef, rulesRef);
 		const onSubmit = () => {
 			validate()
 				.then(() => {
-					// context.emit("emailForgot", toRaw(modelRef));
-					console.log(toRaw(modelRef));
-					showFormRecovery();
+					try {
+						$notification.success("Ok done!", "Great!");
+					} catch (error) {
+						console.error(error);
+					}
+					console.log("Email recovery, preapre for API: ", toRaw(modelRef));
+					enableStepValidateCode.value = true;
 				})
 				.catch((err) => {
-					// console.log("error", err);
 					try {
+						console.log("err: ", err);
 						$notification.error(
 							"Oops, something went wrong!",
-							"Username or password incorrect, please try again!"
+							`Please try again! Error is ${err?.errorFields[0]?.errors[0]}`
 						);
 					} catch (error) {
 						console.error(error);
@@ -104,8 +112,8 @@ export default defineComponent({
 			validate,
 			validateInfos,
 			modelRef,
-			...toRefs(modelRef),
 			onSubmit,
+			enableStepValidateCode,
 		};
 	},
 });

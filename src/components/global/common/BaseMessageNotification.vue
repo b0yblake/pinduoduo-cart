@@ -1,6 +1,4 @@
-<template>
-	<div>isDisplay: {{ isDisplay }}</div>
-</template>
+<template></template>
 <script lang="ts">
 import { defineComponent, inject, watch } from "vue";
 import { notification } from "ant-design-vue";
@@ -33,9 +31,7 @@ export default defineComponent({
 			}
 		);
 
-		return {
-			isDisplay: $notification?.notificationData?.isDisplay,
-		};
+		return {};
 	},
 });
 </script>
