@@ -1,6 +1,6 @@
-@mixin schema-generator(
-	$primary,
+@mixin schema-generator($primary,
 	$secondary,
+	$third,
 	$background,
 	$alpha-bg,
 	$highlight,
@@ -8,10 +8,10 @@
 	$text-secondary,
 	$boder-color,
 	$tab-active,
-	$banner-home-dot
-) {
+	$banner-home-dot) {
 	#{--primary}: $primary;
 	#{--secondary}: $secondary;
+	#{--third}: $third;
 	#{--alpha-bg}: $alpha-bg;
 	#{--background}: $background;
 	#{--highlight}: $highlight;

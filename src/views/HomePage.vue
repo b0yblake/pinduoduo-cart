@@ -10,37 +10,19 @@
 				</li>
 			</ul>
 
-			<CarouselGroup :title="'Originals carousel'" />
-
-			<button type="button" @click="showNotification">
-				Click to show notification
-			</button>
+			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
 		</LayoutDefault>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent } from "vue";
 import LayoutDefault from "@/templates/layouts/LayoutDefault.vue";
 
 export default defineComponent({
 	name: "HomePage",
 	components: {
 		LayoutDefault,
-	},
-	setup() {
-		const $notification = inject("$notification");
-		const showNotification = () => {
-			try {
-				$notification.success("message day", "desc day");
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		return {
-			showNotification,
-		};
 	},
 });
 </script>

@@ -1,11 +1,11 @@
 <template>
-	<div :class="$style.wrap">
+	<div class="wrap">
 		<!-- THE HEADER -->
 		<TheHeader />
 		<!-- //THE HEADER -->
 
 		<!-- MAIN -->
-		<main :class="$style.main">
+		<main class="main">
 			<slot />
 		</main>
 		<!-- //MAIN -->
@@ -24,10 +24,3 @@ export default defineComponent({
 	name: `LayoutDefault`,
 });
 </script>
-
-<style lang="scss" module>
-.wrap {
-	position: relative;
-	overflow: hidden;
-}
-</style>

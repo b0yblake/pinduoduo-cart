@@ -1,36 +1,27 @@
 .wrap {
 	position: relative;
+	overflow: hidden;
+	margin: 0 auto;
+	max-width: 480px;
+	min-width: auto;
+	height: auto;
+	// background-color: var(--background);
+	box-shadow: 8px 10px 30px #f3f3f3;
 }
 
-.auth {
-	&__wrapper {
-		@include flexbox;
-		@include flex-direction(row);
-		min-height: 650px;
-		width: 1024px;
-		margin: 0 auto;
-		background-color: #fff;
+.intro {
+	&__title {
+		font-size: 18px;
+		margin-top: 25px;
 	}
 
-	&--bg {
-		@include flex(1 0 60%);
-		background: url(@/assets/images/bg-login2.jpg) 100% 100%;
-		background-position: center;
-		background-size: cover;
+	&__desc {
+		font-size: 14px;
+		margin-top: 5px;
+		color: rgb(99, 99, 99);
 	}
+}
 
-	&__action {
-		@include flex(1 0 40%);
-		padding: 20px;
-	}
-
-	&--logo {
-		margin: 0 auto;
-		width: 250px;
-
-		img {
-			width: 100%;
-			height: auto;
-		}
-	}
+header {
+	padding: 20px 0;
 }

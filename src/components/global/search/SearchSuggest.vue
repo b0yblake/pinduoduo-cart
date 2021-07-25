@@ -9,8 +9,9 @@ export default defineComponent({
 	name: "SearchSuggest",
 	props: {
 		searchSuggest: {
-			type: Object as PropType<>
-		}
+			type: Object,
+			required: false,
+		},
 	},
 	setup(props, context) {
 		return {};

@@ -1,16 +1,17 @@
 <template>
 	<div class="search__wrap">
-		<div class="search__header">
-			<div class="search__back" v-show="stateOnFocus">
+		<div class="search__header" :class="{ search__inline: stateOnFocus }">
+			<div class="search__back">
 				<a-button type="link">
 					<template #icon><LeftOutlined /></template>
 				</a-button>
 			</div>
-			<SearchInput @triggerFocusSearch="handleOnFocus" />
-			<div class="search__advance" v-show="stateOnFocus">
-				<a-button type="link">
-					<template #icon><FileSearchOutlined /></template>
-				</a-button>
+			<SearchInput
+				@triggerFocusSearch="handleOnFocus"
+				:stateOnFocus="stateOnFocus"
+			/>
+			<div class="search__advance">
+				<button type="button" class="">Advance</button>
 			</div>
 		</div>
 		<div class="search__content">

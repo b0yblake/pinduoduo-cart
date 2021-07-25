@@ -1,16 +1,3 @@
-.intro {
-	&__title {
-		font-size: 18px;
-		margin-top: 25px;
-	}
-
-	&__desc {
-		font-size: 14px;
-		margin-top: 5px;
-		color: rgb(99, 99, 99);
-	}
-}
-
 .form {
 	&__wrap {
 		border-top: 1px solid rgb(235, 235, 235);
@@ -59,4 +46,37 @@
 
 .ant-form-item-label {
 	padding-bottom: 4px !important;
+}
+
+.auth {
+	&__wrapper {
+		@include flexbox;
+		@include flex-direction(row);
+		min-height: 650px;
+		width: 1024px;
+		margin: 0 auto;
+		background-color: #fff;
+	}
+
+	&--bg {
+		@include flex(1 0 60%);
+		background: url(@/assets/images/bg-login2.jpg) 100% 100%;
+		background-position: center;
+		background-size: cover;
+	}
+
+	&__action {
+		@include flex(1 0 40%);
+		padding: 20px;
+	}
+
+	&--logo {
+		margin: 0 auto;
+		width: 250px;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
 }
