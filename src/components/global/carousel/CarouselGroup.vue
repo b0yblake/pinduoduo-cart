@@ -53,8 +53,10 @@
 <script lang="ts">
 import { PropType, unref, ref, reactive } from "vue";
 import useViewport from "@/composables/viewport";
-import thumb1 from "@/assets/images/products/3NTAbAiao4JLzFQw6YxP1YZppM8.jpg";
-import thumb2 from "@/assets/images/products/vRPDQP51i1Z2RuoIQaxVSj7Pd5R.jpg";
+const thumb1 =
+	"https://vn-test-11.slatic.net/p/5f4d71a877565137447b5ba5f529a680.jpg_720x720q80.jpg_.webp";
+const thumb2 =
+	"https://vn-test-11.slatic.net/p/6c687976fa239bf3700b0006e39c6763.jpg_720x720q80.jpg_.webp";
 
 export default {
 	name: "CarouselGroup",

@@ -8,14 +8,9 @@
 						>forgot-password</router-link
 					>
 				</li>
-				<li>
-					<router-link to="/account/retrieve-password"
-						>retrieve-password</router-link
-					>
-				</li>
 			</ul>
 
-			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
+			<CarouselGroup :title="'Originals carousel'" />
 
 			<button type="button" @click="showNotification">
 				Click to show notification

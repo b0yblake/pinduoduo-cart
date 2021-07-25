@@ -1,5 +1,7 @@
 <template>
-	<header class="header">The Header</header>
+	<header class="header">
+		<TheSearchWrapper />
+	</header>
 </template>
 
 <script lang="ts">
