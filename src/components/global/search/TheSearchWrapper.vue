@@ -65,6 +65,7 @@ export default defineComponent({
 						{
 							title: "Long board",
 							url: "/furniture/chair",
+							label: "Hot",
 						},
 						{
 							title: "Single",
@@ -73,6 +74,7 @@ export default defineComponent({
 						{
 							title: "Long board",
 							url: "/furniture/chair",
+							label: "Hot",
 						},
 						{
 							title: "Single",

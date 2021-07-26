@@ -1,21 +1,32 @@
 <template>
 	<div class="search__panel">
 		<div
-			v-for="(category, index) in searchSuggest"
+			v-for="(category, index) in Object.keys(searchSuggest)"
 			:key="`${category}_${index}`"
 		>
 			<div
 				class="search__panel-wrapper"
-				v-for="(feature, index) in category"
+				v-for="(feature, index) in searchSuggest[category]"
 				:key="`${feature}_${index}`"
 			>
 				<div class="panel__header">
 					<div class="panel__header-title">
-						<HistoryOutlined />
+						<template v-if="category === 'recentSearch'"
+							><HistoryOutlined
+						/></template>
+						<template v-if="category === 'influenceSearch'">
+							<CompassOutlined />
+						</template>
+
 						<strong class="title">{{ feature.title }}</strong>
 					</div>
 					<button type="button" class="btn" @click="onClearCategory">
-						<DeleteOutlined />
+						<template v-if="category === 'recentSearch'">
+							<DeleteOutlined />
+						</template>
+						<template v-if="category === 'influenceSearch'">
+							<EyeOutlined />
+						</template>
 					</button>
 				</div>
 				<div class="panel__content">
@@ -27,8 +38,9 @@
 						>
 							<a-tag
 								><router-link :to="item.url">
-									{{ item.title }}</router-link
-								></a-tag
+									{{ item.title }}
+									<span :class="{ hot: item?.label }">{{ item?.label }}</span>
+								</router-link></a-tag
 							>
 						</li>
 					</ul>
@@ -40,7 +52,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref, computed } from "vue";
-import { DeleteOutlined, HistoryOutlined } from "@ant-design/icons-vue";
+import {
+	DeleteOutlined,
+	HistoryOutlined,
+	EyeOutlined,
+	CompassOutlined,
+} from "@ant-design/icons-vue";
 
 export default defineComponent({
 	name: "SearchSuggest",
@@ -53,9 +70,12 @@ export default defineComponent({
 	components: {
 		DeleteOutlined,
 		HistoryOutlined,
+		EyeOutlined,
+		CompassOutlined,
 	},
 	setup(props, { emit }) {
 		const onClearCategory = () => {};
+
 		return {
 			onClearCategory,
 		};
