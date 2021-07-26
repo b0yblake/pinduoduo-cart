@@ -6,17 +6,18 @@
 
 	&__header {
 		overflow: hidden;
+		@include flexbox;
+		@include justify-content(center);
+		@include flex-direction(row);
 	}
 
 	&__inline {
-		// @include flexbox;
-		// @include justify-content(space-between);
-		// @include flex-direction(row);
+
 
 		.search {
 			&-form {
 
-				width: calc(100% - 200px);
+				width: calc(100% - 80px);
 
 				form {
 					width: 100%;
@@ -31,30 +32,33 @@
 			}
 
 			&__advance {
-				transform: translateX(0);
+				transform: translateX(-30px);
 			}
 		}
 	}
 
 	&__back,
 	&__advance {
-		display: inline-block;
+		position: absolute;
+		transition: all 0.4s ease-in-out;
 	}
 
 	&__back {
+		left: 0;
 		transform: translateX(-40px);
 	}
 
 	&__advance {
+		right: -20px;
+		top: 10px;
 		transform: translateX(40px);
 	}
 
 
 	&-form {
-		display: inline-block;
-		transition: all 0.4s ease-in;
-		width: calc(100% - 100px);
 		position: relative;
+		width: 100%;
+		transition: all 0.4s ease-in-out;
 
 		input[type=text] {
 			background-color: var(--background);

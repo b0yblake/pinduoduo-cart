@@ -11,7 +11,7 @@
 				:stateOnFocus="stateOnFocus"
 			/>
 			<div class="search__advance">
-				<button type="button" class="">Advance</button>
+				<button type="button" class="">Setting</button>
 			</div>
 		</div>
 		<div class="search__content">
