@@ -13,16 +13,34 @@
 			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
 		</LayoutDefault>
 	</div>
+
+	<!-- Dialog page Area -->
+	<teleport to="#layer">
+		<div class="dialog" :class="{ show: stateDialogTheme }">
+			<DialogWrapper ref="targetClickOutSide">
+				<template #default>
+					<!-- <DialogTheme /> -->
+					<DialogGift />
+				</template>
+			</DialogWrapper>
+		</div>
+	</teleport>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import LayoutDefault from "@/templates/layouts/LayoutDefault.vue";
 
 export default defineComponent({
 	name: "HomePage",
 	components: {
 		LayoutDefault,
+	},
+	setup(props, contenxt) {
+		const stateDialogTheme = ref(false);
+		return {
+			stateDialogTheme,
+		};
 	},
 });
 </script>

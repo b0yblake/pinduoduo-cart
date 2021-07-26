@@ -20,7 +20,7 @@
 
 						<strong class="title">{{ feature.title }}</strong>
 					</div>
-					<button type="button" class="btn" @click="onClearCategory">
+					<button type="button" class="btn" @click="onClearCategory(category)">
 						<template v-if="category === 'recentSearch'">
 							<DeleteOutlined />
 						</template>
@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed } from "vue";
+import { defineComponent } from "vue";
 import {
 	DeleteOutlined,
 	HistoryOutlined,
@@ -73,8 +73,15 @@ export default defineComponent({
 		EyeOutlined,
 		CompassOutlined,
 	},
-	setup(props, { emit }) {
-		const onClearCategory = () => {};
+	emits: ["removeRecentResult"],
+	setup(props, context) {
+		const onClearCategory = (category) => {
+			if (category === "recentSearch") {
+				context.emit("removeRecentResult", true);
+			}
+			if (category === "influenceSearch") {
+			}
+		};
 
 		return {
 			onClearCategory,

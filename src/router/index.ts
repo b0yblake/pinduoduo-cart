@@ -1,9 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import SearchAdvance from "@/components/global/search/SearchAdvance.vue";
 
 const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
 		component: () => import("@/views/HomePage.vue"), // use default page
+		children: [
+			{
+				path: "search-advance",
+				name: "SearchAdvance",
+				component: SearchAdvance,
+			},
+		],
 	},
 	{
 		path: "/account/login",

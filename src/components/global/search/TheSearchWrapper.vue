@@ -11,11 +11,18 @@
 				:stateOnFocus="stateOnFocus"
 			/>
 			<div class="search__advance">
-				<button type="button">Advce</button>
+				<router-link to="/search-advance" @click="onEnterDetailPage">
+					Advce
+				</router-link>
 			</div>
 		</div>
 		<div class="search__content" v-show="stateOnFocus">
 			<SearchSuggest :search-suggest="searchSuggest" />
+		</div>
+
+		<!-- Dialog page Area -->
+		<div class="dialog dialog-page" :class="{ show: stateDialogPage }">
+			<router-view></router-view>
 		</div>
 	</div>
 </template>
@@ -23,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
 import { LeftOutlined, FileSearchOutlined } from "@ant-design/icons-vue";
+import useDialogState from "@/composables/state";
 
 export default defineComponent({
 	name: "TheSearchWrapper",
@@ -31,6 +39,8 @@ export default defineComponent({
 		FileSearchOutlined,
 	},
 	setup() {
+		const { isToggleDialog, stateDialogPage } = useDialogState;
+
 		const stateOnFocus = ref<boolean>(false);
 		const searchSuggest = reactive({
 			recentSearch: [
@@ -53,6 +63,28 @@ export default defineComponent({
 						{
 							title: "Microlab",
 							url: "/computer/keyboard",
+						},
+					],
+				},
+				{
+					title: "Monitor",
+					url: "/computer/monitor",
+					key: [
+						{
+							title: "Ryzer",
+							url: "/computer/monitor",
+						},
+						{
+							title: "Viewsonic",
+							url: "/computer/monitor",
+						},
+						{
+							title: "Samsung",
+							url: "/computer/monitor",
+						},
+						{
+							title: "LG",
+							url: "/computer/monitor",
 						},
 					],
 				},
@@ -132,11 +164,17 @@ export default defineComponent({
 			stateOnFocus.value = false;
 		};
 
+		const onEnterDetailPage = () => {
+			isToggleDialog(true);
+		};
+
 		return {
 			stateOnFocus,
 			handleOnFocus,
 			searchSuggest,
 			onBlurInput,
+			stateDialogPage,
+			onEnterDetailPage,
 		};
 	},
 });
