@@ -2,7 +2,7 @@
 	<div class="search__wrap">
 		<div class="search__header" :class="{ search__inline: stateOnFocus }">
 			<div class="search__back">
-				<a-button type="link">
+				<a-button type="link" @click="onBlurInput">
 					<template #icon><LeftOutlined /></template>
 				</a-button>
 			</div>
@@ -11,10 +11,10 @@
 				:stateOnFocus="stateOnFocus"
 			/>
 			<div class="search__advance">
-				<button type="button" class="">Setting</button>
+				<button type="button">Advce</button>
 			</div>
 		</div>
-		<div class="search__content">
+		<div class="search__content" v-show="stateOnFocus">
 			<SearchSuggest :search-suggest="searchSuggest" />
 		</div>
 	</div>
@@ -36,21 +36,89 @@ export default defineComponent({
 			recentSearch: [
 				{
 					title: "keyboard",
-					url: "computer/keyboard",
-				},
-				{
-					title: "lamp",
-					url: "computer/lamp",
+					url: "/computer/keyboard",
+					key: [
+						{
+							title: "Mouse Ryzer",
+							url: "/computer/keyboard",
+						},
+						{
+							title: "Poseidon",
+							url: "/computer/keyboard",
+						},
+						{
+							title: "Ducky",
+							url: "/computer/keyboard",
+						},
+						{
+							title: "Microlab",
+							url: "/computer/keyboard",
+						},
+					],
 				},
 			],
 			influenceSearch: [
 				{
-					title: "fish",
-					url: "tank/fish",
-				},
-				{
 					title: "chair",
-					url: "furniture/chair",
+					url: "/furniture/chair",
+					key: [
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Long board",
+							url: "/furniture/chair",
+						},
+						{
+							title: "Single",
+							url: "/furniture/chair",
+						},
+					],
 				},
 			],
 		});
@@ -58,10 +126,15 @@ export default defineComponent({
 		const handleOnFocus = (event) => {
 			stateOnFocus.value = event;
 		};
+		const onBlurInput = (): void => {
+			stateOnFocus.value = false;
+		};
+
 		return {
 			stateOnFocus,
 			handleOnFocus,
 			searchSuggest,
+			onBlurInput,
 		};
 	},
 });

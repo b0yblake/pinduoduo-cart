@@ -1,19 +1,15 @@
 <template>
 	<div class="search-form">
 		<form @submit.prevent="onSearch">
-			<a-input
-				v-model:value="searchText"
-				@focus.native="onFocus"
-				@blur.native="onBlur"
-			>
-				<template #suffix>
+			<a-input v-model:value="searchText" @focus.native="onFocusInput">
+				<template #prefix>
 					<div class="search__inner">
 						<div class="search__placeholder">
-							<MonitorOutlined />
+							<MonitorOutlined v-show="!stateOnFocus" />
 							<span class="search__placeholder--text">Enter your product</span>
 						</div>
 
-						<div class="search__select-type" v-show="stateOnFocus">
+						<div class="search__select-type">
 							<a-dropdown :trigger="['click']">
 								<a class="ant-dropdown-link" @click.prevent>
 									Hot
@@ -22,18 +18,19 @@
 								<template #overlay>
 									<a-menu>
 										<a-menu-item key="0">
-											<a href="http://www.alipay.com/">1st menu item</a>
+											<span>Hot</span>
 										</a-menu-item>
 										<a-menu-item key="1">
-											<a href="http://www.taobao.com/">2nd menu item</a>
+											<span>News</span>
 										</a-menu-item>
-										<a-menu-divider />
-										<a-menu-item key="3">3rd menu item</a-menu-item>
+										<a-menu-item key="2"><span>Sales</span></a-menu-item>
 									</a-menu>
 								</template>
 							</a-dropdown>
 						</div>
 					</div>
+				</template>
+				<template #suffix>
 					<a-button type="link">
 						<template #icon><CameraOutlined /></template>
 					</a-button>
@@ -72,10 +69,10 @@ export default defineComponent({
 	},
 	setup(props, context) {
 		const searchText = ref<string>("");
-		const onFocus = (): void => {
+		const onFocusInput = (): void => {
 			context.emit("triggerFocusSearch", true);
 		};
-		const onBlur = (): void => {
+		const onBlurInput = (): void => {
 			context.emit("triggerFocusSearch", false);
 		};
 
@@ -84,8 +81,8 @@ export default defineComponent({
 		};
 		return {
 			searchText,
-			onFocus,
-			onBlur,
+			onFocusInput,
+			onBlurInput,
 			onSearch,
 		};
 	},
@@ -93,6 +90,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+::v-deep .ant-input-prefix {
+	z-index: 1;
+}
 .ant-input-affix-wrapper {
 	border: none;
 	box-shadow: none;

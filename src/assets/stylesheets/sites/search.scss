@@ -1,10 +1,8 @@
 .search {
-	&__wrap {
-		position: relative;
-
-	}
+	&__wrap {}
 
 	&__header {
+		position: relative;
 		overflow: hidden;
 		@include flexbox;
 		@include justify-content(center);
@@ -14,7 +12,34 @@
 	&__inline {
 
 
+
 		.search {
+
+			&__inner {
+				@include flexbox;
+				@include flex-direction(row-reverse);
+				@include justify-content(flex-end);
+				width: calc(100% - 50px);
+			}
+
+			&__select-type {
+				display: block;
+				margin: 0 10px;
+
+				&::after {
+					content: '';
+					background-color: #ccc;
+					width: 1px;
+					height: 12px;
+					display: inline-block;
+				}
+			}
+
+			&__placeholder {
+				opacity: 0;
+				transition: all 0.3s ease-in-out;
+			}
+
 			&-form {
 
 				width: calc(100% - 80px);
@@ -22,13 +47,18 @@
 				form {
 					width: 100%;
 				}
+
+				input[type=text] {
+					padding: 0 10px 0 70px;
+				}
+
 			}
 
 			&__back,
 			&__advance {}
 
 			&__back {
-				transform: translateX(0);
+				transform: translateX(10px);
 			}
 
 			&__advance {
@@ -46,12 +76,21 @@
 	&__back {
 		left: 0;
 		transform: translateX(-40px);
+
+		.anticon {
+			color: var(--secondary);
+		}
 	}
 
 	&__advance {
 		right: -20px;
 		top: 10px;
 		transform: translateX(40px);
+
+		>button {
+			color: var(--highlight);
+			font-weight: 700;
+		}
 	}
 
 
@@ -65,18 +104,6 @@
 			border-radius: 5px;
 			border: 0;
 			box-shadow: none;
-
-			::-webkit-input-placeholder {
-				color: var(--alpha-bg);
-			}
-
-			:-ms-input-placeholder {
-				color: var(--alpha-bg);
-			}
-
-			::placeholder {
-				color: var(--alpha-bg);
-			}
 		}
 
 		button {
@@ -86,6 +113,12 @@
 
 	&__placeholder {
 		vertical-align: middle;
+		opacity: 1;
+		margin-right: 40px;
+
+		&--text {
+			color: var(--third)
+		}
 
 		.anticon {
 			vertical-align: 0;
@@ -93,9 +126,22 @@
 			margin-right: 5px;
 		}
 
-		&--text {
-			color: var(--third)
+	}
+
+	&__select-type {
+		display: none;
+
+		>a {
+			color: var(--secondary);
 		}
+
+		.anticon {
+			vertical-align: 0;
+			line-height: 1;
+			margin-right: 5px;
+			color: var(--secondary);
+		}
+
 	}
 
 	&__inner {
@@ -106,9 +152,72 @@
 		color: var(--third);
 
 		>a {
-			color: var(--third)
+			color: var(--third);
 		}
 	}
 
+	&__panel {
+		position: absolute;
+		background-color: var(--hight-contract);
+		height: 100%;
+		width: 100%;
+		padding: 30px 30px 10px;
+
+		.btn {
+			padding: 5px;
+		}
+
+		&-wrapper {
+			margin-bottom: 30px;
+		}
+	}
+}
+
+.panel {
+	&__header {
+		@include flexbox;
+		@include justify-content(space-between);
+		@include flex-direction(row);
+
+		&-title {
+			@include flexbox;
+			@include justify-content(flex-start);
+			@include flex-direction(row);
+			@include align-items(center);
+
+			.anticon {
+				vertical-align: 0;
+				line-height: 1;
+				margin-right: 5px;
+			}
+
+			strong {
+				font-size: 16px;
+				font-weight: 400;
+				margin-left: 10px;
+			}
+		}
+	}
+
+	&__content {
+		>ul {
+			@include flexbox;
+			@include justify-content(flex-start);
+			@include flex-direction(row);
+			@include flex-wrap(wrap);
+			margin-top: 8px;
+
+			>li {
+				margin: 0 5px 5px 0;
+			}
+		}
+
+		.ant-tag {
+			border-radius: 12px;
+			padding: 3px 10px;
+			border: none;
+			background-color: var(--background);
+		}
+	}
 
 }
