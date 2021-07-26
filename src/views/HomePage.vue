@@ -51,7 +51,7 @@
 			<DialogWrapper ref="targetClickOutSide">
 				<template #default>
 					<!-- <DialogTheme /> -->
-					<DialogGift />
+					<DialogGift @onCLose="handleOnCLose" />
 				</template>
 			</DialogWrapper>
 		</div>
@@ -72,11 +72,14 @@ export default defineComponent({
 	},
 	setup() {
 		const { stateDialogPage } = useDialogState;
-		const stateDialogTheme = ref(false);
-
+		const stateDialogTheme = ref(true);
+		const handleOnCLose = (state) => {
+			stateDialogTheme.value = state;
+		};
 		return {
 			stateDialogTheme,
 			stateDialogPage,
+			handleOnCLose,
 		};
 	},
 });

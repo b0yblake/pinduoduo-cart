@@ -14,4 +14,49 @@
 		right: 0;
 	}
 
+	&-gift {
+		&__wrap {
+			position: relative;
+
+			img {
+				width: 250px;
+				height: auto;
+			}
+
+			.anticon {
+				position: absolute;
+				top: -20px;
+				right: -10px;
+				font-size: 20px;
+				color: var(--hight-contract);
+			}
+		}
+
+		&__content {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			padding: 20px 30px;
+		}
+	}
+
+}
+
+#layer {
+	.dialog {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+		@include justify-content(center);
+		@include align-items(center);
+		background: #0008;
+
+		&.show {
+			@include flexbox;
+		}
+	}
 }
