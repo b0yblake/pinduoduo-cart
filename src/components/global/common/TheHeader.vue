@@ -1,6 +1,7 @@
 <template>
 	<header class="header">
-		<TheSearchWrapper />
+		<h1 class="blind">Pindoudou e-commerce social</h1>
+		<slot />
 	</header>
 </template>
 
