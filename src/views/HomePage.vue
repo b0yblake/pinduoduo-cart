@@ -35,14 +35,14 @@
 			</ul> -->
 
 			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
-		</LayoutDefault>
-	</div>
 
-	<!-- Dialog page search advance -->
-	<div class="search-page">
-		<div class="dialog dialog-page" :class="{ show: stateDialogPage }">
-			<router-view></router-view>
-		</div>
+			<!-- Dialog page search advance -->
+			<div class="search-page">
+				<div class="dialog dialog-page" :class="{ show: stateDialogPage }">
+					<router-view></router-view>
+				</div>
+			</div>
+		</LayoutDefault>
 	</div>
 
 	<!-- Modal common -->

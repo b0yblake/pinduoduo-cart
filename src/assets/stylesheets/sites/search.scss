@@ -171,6 +171,10 @@
 			margin-bottom: 30px;
 		}
 	}
+
+	&-advance {
+		background-color: var(--hight-contract);
+	}
 }
 
 .panel {
@@ -228,5 +232,4 @@
 			background-color: var(--background);
 		}
 	}
-
 }

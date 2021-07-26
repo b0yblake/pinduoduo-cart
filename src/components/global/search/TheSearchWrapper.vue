@@ -2,7 +2,11 @@
 	<div class="search__wrap">
 		<div class="search__header" :class="{ search__inline: stateOnFocus }">
 			<!-- SLOT: button back to previous page -->
-			<slot name="header-back-btn" :onBlurInput="onBlurInput" />
+			<slot
+				name="header-back-btn"
+				:onBlurInput="onBlurInput"
+				:onBackPage="onBackPage"
+			/>
 
 			<SearchForm
 				@triggerFocusSearch="handleOnFocus"
@@ -25,11 +29,14 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
 import useDialogState from "@/composables/state";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
 	name: "TheSearchWrapper",
 	setup() {
+		const router = useRouter();
 		const { isToggleDialog } = useDialogState;
+
 		//mock data search suggest result
 		const searchSuggest = reactive({
 			recentSearch: [
@@ -145,6 +152,7 @@ export default defineComponent({
 				},
 			],
 		});
+
 		const stateOnFocus = ref<boolean>(false);
 		const handleOnFocus = (event) => {
 			stateOnFocus.value = event;
@@ -155,6 +163,10 @@ export default defineComponent({
 		const onEnterDetailPage = () => {
 			isToggleDialog(true);
 		};
+		const onBackPage = () => {
+			isToggleDialog(false);
+			router.push("/");
+		};
 
 		return {
 			stateOnFocus,
@@ -162,6 +174,7 @@ export default defineComponent({
 			searchSuggest,
 			onBlurInput,
 			onEnterDetailPage,
+			onBackPage,
 		};
 	},
 });
