@@ -47,11 +47,16 @@
 
 	<!-- Modal common -->
 	<teleport to="#layer">
-		<div class="dialog" :class="{ show: stateDialogTheme }">
+		{{ stateDialog }}
+		<div class="dialog" :class="{ show: stateDialog }">
 			<DialogWrapper ref="targetClickOutSide">
 				<template #default>
-					<!-- <DialogTheme /> -->
-					<DialogGift @onCLose="handleOnCLose" />
+					<DialogGift />
+				</template>
+				<template #dialog-close="{ onCLose }">
+					<button type="button" @click="onCLose">
+						<CloseCircleOutlined />
+					</button>
 				</template>
 			</DialogWrapper>
 		</div>
@@ -59,27 +64,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import LayoutDefault from "@/templates/layouts/LayoutDefault.vue";
-import useDialogState from "@/composables/state";
-import { LeftOutlined } from "@ant-design/icons-vue";
+import { LeftOutlined, CloseCircleOutlined } from "@ant-design/icons-vue";
+import useDialogState from "@/composables/dialogState";
+import useDialogThemeState from "@/composables/themeState";
 
 export default defineComponent({
 	name: "HomePage",
 	components: {
 		LayoutDefault,
 		LeftOutlined,
+		CloseCircleOutlined,
 	},
 	setup() {
-		const { stateDialogPage } = useDialogState;
-		const stateDialogTheme = ref(true);
-		const handleOnCLose = (state) => {
-			stateDialogTheme.value = state;
-		};
+		const { stateDialogPage } = useDialogThemeState;
+		const { stateDialog } = useDialogState;
 		return {
-			stateDialogTheme,
 			stateDialogPage,
-			handleOnCLose,
+			stateDialog,
 		};
 	},
 });

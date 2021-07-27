@@ -9,26 +9,20 @@
 		transition: all 0.3s ease-in-out;
 	}
 
-
 	&.show {
 		right: 0;
 	}
 
+	&__wrapper {
+		position: relative;
+	}
+
+
 	&-gift {
 		&__wrap {
-			position: relative;
-
 			img {
 				width: 250px;
 				height: auto;
-			}
-
-			.anticon {
-				position: absolute;
-				top: -20px;
-				right: -10px;
-				font-size: 20px;
-				color: var(--hight-contract);
 			}
 		}
 
@@ -38,6 +32,14 @@
 			top: 0;
 			padding: 20px 30px;
 		}
+	}
+
+	.anticon {
+		position: absolute;
+		top: -20px;
+		right: -10px;
+		font-size: 20px;
+		color: var(--hight-contract);
 	}
 
 }
