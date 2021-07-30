@@ -16,7 +16,7 @@
 		"test": "jest",
 		"test:coverage": "jest --coverage",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0 -s",
-		"commit": "npx cz",
+		"commit": "cz",
 		"docs": "typedoc --out ./docs/ ./src/ && npm run serve:docs",
 		"serve:docs": "http-server ./docs -p 3001 -o",
 		"analysis": "cross-env use_analyzer=true vue-cli-service build",
@@ -34,7 +34,7 @@
 	},
 	"config": {
 		"commitizen": {
-			"path": "./node_modules/cz-customizable"
+			"path": "./node_modules/cz-conventional-changelog"
 		}
 	},
 	"dependencies": {
@@ -83,6 +83,7 @@
 		"@vue/test-utils": "^2.0.0-rc.10",
 		"autoprefixer": "^10.2.6",
 		"commitizen": "^4.2.3",
+		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^7.30.0",
 		"eslint-config-airbnb-base": "^14.2.1",
 		"eslint-config-prettier": "^8.3.0",
