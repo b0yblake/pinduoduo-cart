@@ -34,13 +34,17 @@
 		}
 	}
 
-	.anticon {
-		position: absolute;
-		top: -20px;
-		right: -10px;
-		font-size: 20px;
-		color: var(--hight-contract);
+	.btn-close {
+
+		.anticon {
+			position: absolute;
+			top: -20px;
+			right: -10px;
+			font-size: 20px;
+			color: var(--hight-contract);
+		}
 	}
+
 
 }
 

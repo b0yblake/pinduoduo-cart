@@ -25,20 +25,13 @@
 				</template>
 			</TheSearchWrapper>
 
-			<!-- <ul>
-				<li><router-link to="/account/login">Login</router-link></li>
-				<li>
-					<router-link to="/account/forgot-password"
-						>forgot-password</router-link
-					>
-				</li>
-			</ul> -->
-
-			<!-- <CarouselGroup :title="'Originals carousel'" /> -->
+			<!-- Navigation bottom fixed -->
+			<NavigationCommonUser />
+			<!-- <NavigationProduct /> -->
 
 			<!-- Dialog page search advance -->
 			<div class="search-page">
-				<div class="dialog dialog-page" :class="{ show: stateDialogPage }">
+				<div class="dialog dialog-page" :class="{ show: dialogPageState }">
 					<router-view></router-view>
 				</div>
 			</div>
@@ -47,14 +40,13 @@
 
 	<!-- Modal common -->
 	<teleport to="#layer">
-		{{ stateDialog }}
 		<div class="dialog" :class="{ show: stateDialog }">
 			<DialogWrapper ref="targetClickOutSide">
 				<template #default>
 					<DialogGift />
 				</template>
 				<template #dialog-close="{ onCLose }">
-					<button type="button" @click="onCLose">
+					<button type="button" @click="onCLose" class="btn-close">
 						<CloseCircleOutlined />
 					</button>
 				</template>
@@ -68,7 +60,7 @@ import { defineComponent } from "vue";
 import LayoutDefault from "@/templates/layouts/LayoutDefault.vue";
 import { LeftOutlined, CloseCircleOutlined } from "@ant-design/icons-vue";
 import useDialogState from "@/composables/dialogState";
-import useDialogThemeState from "@/composables/themeState";
+import useDialogPageState from "@/composables/dialogPageState";
 
 export default defineComponent({
 	name: "HomePage",
@@ -78,10 +70,10 @@ export default defineComponent({
 		CloseCircleOutlined,
 	},
 	setup() {
-		const { stateDialogPage } = useDialogThemeState;
+		const { dialogPageState } = useDialogPageState;
 		const { stateDialog } = useDialogState;
 		return {
-			stateDialogPage,
+			dialogPageState,
 			stateDialog,
 		};
 	},

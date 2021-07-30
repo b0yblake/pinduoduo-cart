@@ -28,14 +28,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import useDialogState from "@/composables/state";
+import useDialogPageState from "@/composables/dialogPageState";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
 	name: "TheSearchWrapper",
 	setup() {
 		const router = useRouter();
-		const { isToggleDialog } = useDialogState;
+		const { setdialogPageState } = useDialogPageState;
 
 		//mock data search suggest result
 		const searchSuggest = reactive({
@@ -161,10 +161,10 @@ export default defineComponent({
 			stateOnFocus.value = false;
 		};
 		const onEnterDetailPage = () => {
-			isToggleDialog(true);
+			setdialogPageState(true);
 		};
 		const onBackPage = () => {
-			isToggleDialog(false);
+			setdialogPageState(false);
 			router.push("/");
 		};
 

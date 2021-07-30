@@ -90,7 +90,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-::v-deep .ant-input-prefix {
+:deep .ant-input-prefix {
 	z-index: 1;
 }
 .ant-input-affix-wrapper {
