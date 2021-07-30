@@ -1,0 +1,74 @@
+{
+	'functions': true
+}
+
+${{spritesheet_info.name}}-vars: (
+	{{#items}}
+	'{{name}}': (
+		offset-x: {{px.offset_x}},
+		offset-y: {{px.offset_y}},
+		width: {{px.width}},
+		height: {{px.height}},
+		total-width: {{px.total_width}},
+		total-height: {{px.total_height}},
+		imageSrc: '{{{escaped_image}}}'
+	),
+	{{/items}}
+);
+${{spritesheet_info.name}}-origin: (
+  total-width: {{spritesheet.px.width}},
+  total-height: {{spritesheet.px.height}},
+  imageSrc: '{{spritesheet.escaped_image}}'
+);
+
+{{#options.functions}}
+@mixin sprite-size($image) {
+	background-size: map-get($image, 'total-width') map-get($image, 'total-height');
+}
+
+@mixin sprite-image($image) {
+	$image-path: map-get($image, 'imageSrc');
+	background-image: url($image-path);
+}
+
+@mixin sprite-image-retina($image) {
+	$image-path: map-get($image, 'imageSrc');
+	$image-path-retina: str-slice($image-path, 1, str-index($image-path, '.png') - 1) + '@2x.png';
+	background-image: url($image-path-retina);
+}
+
+{{#if retina_spritesheet_info}}
+%set-{{spritesheet_info.name}} {
+  background-repeat: no-repeat;
+  @include sprite-image(${{spritesheet_info.name}}-origin);
+  @media
+		only screen and (-webkit-min-device-pixel-ratio: 2),
+		only screen and (   min--moz-device-pixel-ratio: 2),
+		only screen and (     -o-min-device-pixel-ratio: 2/1),
+		only screen and (        min-device-pixel-ratio: 2),
+		only screen and (                min-resolution: 192dpi),
+		only screen and (                min-resolution: 2dppx) {
+      @include sprite-size(${{spritesheet_info.name}}-origin);
+      @include sprite-image-retina(${{spritesheet_info.name}}-origin);
+	}
+}
+{{else}}
+@mixin set-{{spritesheet_info.name}} {
+  @include sprite-size(${{spritesheet_info.name}}-origin);
+  @include sprite-image(${{spritesheet_info.name}}-origin);
+}
+{{/if}}
+
+@mixin sp-{{spritesheet_info.name}}($image, $size: true) {
+  {{#if retina_spritesheet_info}}
+  @extend %set-{{spritesheet_info.name}};
+  {{else}}
+  @include set-{{spritesheet_info.name}};
+  {{/if}}
+	background-position: map-get(map-get(${{spritesheet_info.name}}-vars, $image), 'offset-x') map-get(map-get(${{spritesheet_info.name}}-vars, $image), 'offset-y');
+	@if $size {
+		width: map-get(map-get(${{spritesheet_info.name}}-vars, $image), 'width');
+		height: map-get(map-get(${{spritesheet_info.name}}-vars, $image), 'height');
+	}
+}
+{{/options.functions}}

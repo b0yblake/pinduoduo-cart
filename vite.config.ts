@@ -1,11 +1,11 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import ViteComponents from "vite-plugin-components";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import Spritesmith from "vite-plugin-spritesmith";
 import { resolve } from "path";
 
-const isProd = process.env.NODE_ENV === "production";
-const isDevl = process.env.NODE_ENV === "development";
+// const isProd = process.env.NODE_ENV === "production";
+// const isDevl = process.env.NODE_ENV === "development";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,6 +30,7 @@ export default defineConfig({
           @import "./src/assets/stylesheets/include-media";
 					@import "./src/assets/stylesheets/mixins/_mixins.scss";
 					@import "./src/assets/stylesheets/mixins/_theme.mixin.scss";
+					@import "./src/assets/stylesheets/sprites-data/sprite.scss";
         `,
 			},
 		},
@@ -57,8 +58,34 @@ export default defineConfig({
 			// works when `directoryAsNamespace: true`
 			globalNamespaces: [],
 		}),
-		// vueJsx({
-		//   options are passed on to @vue/babel-plugin-jsx
-		// })
+		Spritesmith({
+			watch: true,
+			src: {
+				cwd: "./src/assets/images/sprites",
+				glob: "*.png",
+			},
+			target: {
+				image: "./src/assets/stylesheets/sprites-data/sprite.png",
+				css: [
+					[
+						"./src/assets/stylesheets/sprites-data/sprite.scss",
+						{
+							format: "handlebars_based_template",
+						},
+					],
+				],
+			},
+			apiOptions: {
+				cssImageRef: "src/assets/stylesheets/sprites-data/sprite.png",
+				spritesheet_info: {
+					name: "normal",
+					format: "handlebars_based_template",
+				},
+			},
+			customTemplates: {
+				handlebars_based_template:
+					"./src/assets/stylesheets/sprites-data/spritesmith-mixins.handlebars",
+			},
+		}),
 	],
 });

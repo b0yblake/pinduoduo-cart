@@ -1,0 +1,135 @@
+$normal-vars: (
+	'ic-buy': (
+		offset-x: -1656px,
+		offset-y: -720px,
+		width: 24px,
+		height: 24px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-calendar': (
+		offset-x: -1656px,
+		offset-y: 0px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-dimond': (
+		offset-x: -1656px,
+		offset-y: -90px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-phone': (
+		offset-x: -1656px,
+		offset-y: -180px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-pig': (
+		offset-x: -1656px,
+		offset-y: -270px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-rank': (
+		offset-x: 0px,
+		offset-y: 0px,
+		width: 828px,
+		height: 1792px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-redcard': (
+		offset-x: -828px,
+		offset-y: 0px,
+		width: 828px,
+		height: 1792px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-sale': (
+		offset-x: -1656px,
+		offset-y: -360px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-ship': (
+		offset-x: -1656px,
+		offset-y: -450px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-sing': (
+		offset-x: -1656px,
+		offset-y: -540px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+	'ic-tree': (
+		offset-x: -1656px,
+		offset-y: -630px,
+		width: 90px,
+		height: 90px,
+		total-width: 1746px,
+		total-height: 1792px,
+		imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+	),
+);
+$normal-origin: (
+  total-width: 1746px,
+  total-height: 1792px,
+  imageSrc: 'src/assets/stylesheets/sprites-data/sprite.png'
+);
+
+@mixin sprite-size($image) {
+	background-size: map-get($image, 'total-width') map-get($image, 'total-height');
+}
+
+@mixin sprite-image($image) {
+	$image-path: map-get($image, 'imageSrc');
+	background-image: url($image-path);
+}
+
+@mixin sprite-image-retina($image) {
+	$image-path: map-get($image, 'imageSrc');
+	$image-path-retina: str-slice($image-path, 1, str-index($image-path, '.png') - 1) + '@2x.png';
+	background-image: url($image-path-retina);
+}
+
+@mixin set-normal {
+  @include sprite-size($normal-origin);
+  @include sprite-image($normal-origin);
+}
+
+@mixin sp-normal($image, $size: true) {
+  @include set-normal;
+	background-position: map-get(map-get($normal-vars, $image), 'offset-x') map-get(map-get($normal-vars, $image), 'offset-y');
+	@if $size {
+		width: map-get(map-get($normal-vars, $image), 'width');
+		height: map-get(map-get($normal-vars, $image), 'height');
+	}
+}
