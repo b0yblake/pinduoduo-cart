@@ -25,6 +25,8 @@
 				</template>
 			</TheSearchWrapper>
 
+			<CarouselInitial />
+
 			<!-- Navigation main categories -->
 			<NavMainCateogries />
 
@@ -75,6 +77,7 @@ export default defineComponent({
 	setup() {
 		const { dialogPageState } = useDialogPageState;
 		const { stateDialog } = useDialogState;
+
 		return {
 			dialogPageState,
 			stateDialog,

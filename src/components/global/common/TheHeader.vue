@@ -1,6 +1,9 @@
 <template>
 	<header class="header">
 		<h1 class="blind">Pindoudou e-commerce social</h1>
+
+		<span class="ic-buy"></span>
+
 		<slot />
 	</header>
 </template>
@@ -13,4 +16,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.ic-buy {
+	@include sp-normal("ic-buy");
+}
+// .icon-retina {
+// 	@include retina-sprites($retina-groups);
+// }
+</style>

@@ -2,15 +2,7 @@
 	<CarouselRow :title="title">
 		<template #default>
 			<div class="carousel-fluid">
-				<swiper
-					:slides-per-view="5"
-					:space-between="0"
-					navigation
-					:pagination="{ clickable: true }"
-					:scrollbar="{ draggable: true }"
-					@swiper="onSwiper"
-					@slideChange="onSlideChange"
-				>
+				<swiper :options="swiperOption">
 					<swiper-slide v-for="n in 10" :key="n">
 						<div class="slide__wrap">
 							<img :src="`${n % 2 === 0 ? thumb1 : thumb2}`" alt="" />
@@ -65,6 +57,10 @@ export default {
 			type: String as PropType,
 			required: true,
 		},
+		addedOption: {
+			type: Object,
+			required: false,
+		},
 	},
 	setup() {
 		const { width } = useViewport();
@@ -72,6 +68,16 @@ export default {
 			navigationPrevRef: null,
 			navigationNextRef: null,
 		});
+
+		// const swiperOption = reactive({
+    //   slides-per-view="5"
+		// 	space-between="10"
+		// 	navigation
+		// 	pagination="{ clickable: true }"
+		// 	scrollbar="{ draggable: true }"
+		// 	@swiper="onSwiper"
+		// 	@slideChange="onSlideChange"
+		// })
 
 		const customSwiperParams = ref({
 			observer: true,
