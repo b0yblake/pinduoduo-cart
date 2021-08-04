@@ -53,16 +53,13 @@ import {
 } from "@ant-design/icons-vue";
 
 export default defineComponent({
-	name: "NavigationCommonUser",
+	name: "NavBottomCommonUser",
 	components: {
 		HeartOutlined,
 		FireOutlined,
 		ShoppingOutlined,
 		MessageOutlined,
 		UserOutlined,
-	},
-	setup() {
-		return {};
 	},
 });
 </script>

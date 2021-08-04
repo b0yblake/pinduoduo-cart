@@ -48,14 +48,11 @@ import {
 } from "@ant-design/icons-vue";
 
 export default defineComponent({
-	name: "NavigationProduct",
+	name: "NavBottomProduct",
 	components: {
 		ShopOutlined,
 		HeartOutlined,
 		MessageOutlined,
-	},
-	setup() {
-		return {};
 	},
 });
 </script>

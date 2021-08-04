@@ -25,9 +25,12 @@
 				</template>
 			</TheSearchWrapper>
 
+			<!-- Navigation main categories -->
+			<NavMainCateogries />
+
 			<!-- Navigation bottom fixed -->
-			<NavigationCommonUser />
-			<!-- <NavigationProduct /> -->
+			<NavBottomCommonUser />
+			<!-- <NavBottomProduct /> -->
 
 			<!-- Dialog page search advance -->
 			<div class="search-page">
