@@ -25,7 +25,8 @@
 				</template>
 			</TheSearchWrapper>
 
-			<CarouselInitial />
+			<!-- Nav Carousel categories -->
+			<NavMainCategories />
 
 			<!-- Navigation main categories -->
 			<NavMainCateogries />

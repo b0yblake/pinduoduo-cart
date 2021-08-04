@@ -1,18 +1,7 @@
 <template>
 	<div class="carousel-core">
-		{{ swiperOption }}
 		<swiper v-bind="swiperOption" class="mySwiper">
-			<!-- <swiper
-			:slidesPerView="3"
-			:slidesPerColumn="2"
-			:freeMode="true"
-			:spaceBetween="10"
-			:scrollbar="{
-				hide: true,
-			}"
-			class="mySwiper"
-		> -->
-			<swiper-slide v-for="n in 10" :key="n"> Khung giờ mua sắm </swiper-slide>
+			<slot name="slide"></slot>
 		</swiper>
 	</div>
 </template>
@@ -36,7 +25,7 @@ export default defineComponent({
 			default: () => ({
 				freeMode: true,
 				scrollbar: {
-					hide: true,
+					hide: false,
 				},
 			}),
 		},
@@ -44,10 +33,8 @@ export default defineComponent({
 	setup(props, context) {
 		const defaultOptions = reactive({
 			spaceBetween: 10,
-			slidesPerView: 2,
-			slidesPerColumn: 2,
-			observer: true,
-			observeParents: true,
+			slidesPerView: 5,
+			slidesPerColumn: 1,
 		});
 
 		const swiper = reactive({
@@ -68,5 +55,3 @@ export default defineComponent({
 	},
 });
 </script>
-
-<style lang="scss" scoped></style>

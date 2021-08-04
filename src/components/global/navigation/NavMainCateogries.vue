@@ -1,8 +1,7 @@
 <template>
 	<div class="nav-main__wrapper">
-		<ul class="nav-main__list">
-			<li class="nav-main__item"></li>
-		</ul>
+		<!-- Carousel group categories -->
+		<CarouselCategoriesHome />
 	</div>
 </template>
 
