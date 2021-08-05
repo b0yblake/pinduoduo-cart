@@ -4,17 +4,87 @@
 			<div class="carousel-categories">
 				<CarouselInitial :carouselOptional="carouselOptional">
 					<template #slide>
-						<swiper-slide v-for="n in 10" :key="n">
+						<swiper-slide>
 							<div class="slide__wrap">
 								<div class="category-slide__detail">
-									<span class="ic ic-sing"></span>
-									<h3 class="category__title">Sales</h3>
+									<span class="ic ic-calendar"></span>
+									<h3 class="category__title">Calendar</h3>
 								</div>
 							</div>
 							<div class="slide__wrap">
 								<div class="category-slide__detail">
-									<span class="ic ic-pig"></span>
+									<span class="ic ic-redcard"></span>
+									<h3 class="category__title">Red Card</h3>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-dimond"></span>
+									<h3 class="category__title">Dimond</h3>
+								</div>
+							</div>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-sale"></span>
 									<h3 class="category__title">Sales</h3>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-phone"></span>
+									<h3 class="category__title">Phone</h3>
+								</div>
+							</div>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-ship"></span>
+									<h3 class="category__title">Ship</h3>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-pig"></span>
+									<h3 class="category__title">Pig</h3>
+								</div>
+							</div>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-sing"></span>
+									<h3 class="category__title">Sing</h3>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-rank"></span>
+									<h3 class="category__title">Rank</h3>
+								</div>
+							</div>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-tree"></span>
+									<h3 class="category__title">Tree</h3>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-calendar"></span>
+									<h3 class="category__title">Calendar</h3>
+								</div>
+							</div>
+							<div class="slide__wrap">
+								<div class="category-slide__detail">
+									<span class="ic ic-redcard"></span>
+									<h3 class="category__title">Red Card</h3>
 								</div>
 							</div>
 						</swiper-slide>

@@ -26,9 +26,6 @@
 			</TheSearchWrapper>
 
 			<!-- Nav Carousel categories -->
-			<NavMainCategories />
-
-			<!-- Navigation main categories -->
 			<NavMainCateogries />
 
 			<!-- Navigation bottom fixed -->

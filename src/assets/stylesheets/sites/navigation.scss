@@ -29,6 +29,10 @@
 		}
 	}
 
+	&-main__wrapper {
+		border-top: 10px solid var(--background);
+	}
+
 	&__content {
 		position: relative;
 		width: 100%;

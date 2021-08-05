@@ -72,7 +72,6 @@
 	&__wrap {
 		position: relative;
 		overflow: hidden;
-		margin-right: .5rem;
 		cursor: pointer;
 
 		&::after {
@@ -203,8 +202,32 @@
 
 .carousel-categories {
 
-	.ic {
-		display: block;
+	.category {
+		&-slide__detail {
+			text-align: center;
+			vertical-align: top;
+			font-size: 0;
+		}
 
+		&__title {
+			font-size: 14px;
+			font-weight: 400;
+		}
+	}
+
+	.ic {
+		display: inline-block;
+	}
+
+	.swiper-container-horizontal>.swiper-scrollbar {
+		width: 60px;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 0;
+	}
+
+	.swiper-container {
+		padding-bottom: 20px;
+		margin-bottom: 20px;
 	}
 }
