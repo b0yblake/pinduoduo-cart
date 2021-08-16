@@ -3,10 +3,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
 	name: "TheFooter",
+	setup() {
+		const show = ref(false);
+		return {
+			show,
+		};
+	},
 });
 </script>
 

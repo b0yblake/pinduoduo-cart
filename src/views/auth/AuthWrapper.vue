@@ -10,6 +10,20 @@ import {
 import LayoutOnlyContent from "@/templates/layouts/LayoutOnlyContent.vue";
 import { useRoute } from "vue-router";
 import logo from "@/assets/images/pinduoduo-logo.png";
+// import store from "@/store";
+import { useStore } from "@/store";
+
+interface responseLogin {
+	user?: String | Number;
+	password?: String | Number;
+	accountRemember?: Boolean;
+}
+
+interface responseRegister {
+	username?: String | Number;
+	pass?: String | Number;
+	checkPass?: String | Number;
+}
 
 export default defineComponent({
 	name: "AuthWrapper",
@@ -23,6 +37,7 @@ export default defineComponent({
 		),
 	},
 	setup() {
+		const store = useStore();
 		const route = useRoute();
 		const tabs = ref<string[]>(["Login", "Register"]);
 		const currentTab = ref<string>("Login");
@@ -44,12 +59,16 @@ export default defineComponent({
 			currentTab.value = value;
 		};
 
-		const handleFormRegister = (data) => {
-			console.log("data register prepare for api: ", data);
+		const authState = computed(() => store?.state?.auth?.auth);
+
+		const handleFormRegister = (data: responseRegister) => {
+			// console.log("data register prepare for api: ", data);
+			store.dispatch("register", data);
 		};
 
-		const handleFormLogin = (data) => {
+		const handleFormLogin = (data: responseLogin) => {
 			console.log("data login prepare for api: ", data);
+			store.dispatch("auth/login", data);
 		};
 
 		onMounted(() => {
@@ -75,6 +94,7 @@ export default defineComponent({
 			handleCurrentTab,
 			handleFormRegister,
 			handleFormLogin,
+			authState,
 		};
 	},
 });
@@ -87,6 +107,7 @@ export default defineComponent({
 				<h2 class="auth--logo">
 					<img :src="logo" alt="pinduoduo" />
 				</h2>
+				authState: {{ authState }}
 				<div class="detail__tab-nav">
 					<ul class="tab-nav">
 						<li

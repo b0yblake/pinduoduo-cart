@@ -1,12 +1,12 @@
 import { createApp } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
-// import store from '@/store'
+import { key, store } from "@/store";
 
 /** Load style sheets */
 import "@/assets/stylesheets/index.scss";
 import "ant-design-vue/dist/antd.css";
-// import "ant-design-vue/dist/antd.dark.css";
+// import "ant-design-vue/dist/antd.dark.css"; //dark mode
 
 /** Load configs */
 import { AppConfig } from "@/config/app";
@@ -22,7 +22,6 @@ app.config.globalProperties = AppConfig;
 loadAllPlugins(app);
 
 /** Load depen needs */
-// app.use(store)
-
+app.use(store, key);
 app.use(router);
 app.mount("#app");

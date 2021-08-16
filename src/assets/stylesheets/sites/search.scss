@@ -37,7 +37,7 @@
 
 			&__placeholder {
 				opacity: 0;
-				transition: all 0.3s ease-in-out;
+				// transition: all 0.3s ease-in-out;
 			}
 
 			&-form {
@@ -162,6 +162,7 @@
 		height: 100%;
 		width: 100%;
 		padding: 30px 30px 10px;
+		z-index: 2;
 
 		.btn {
 			padding: 5px;
